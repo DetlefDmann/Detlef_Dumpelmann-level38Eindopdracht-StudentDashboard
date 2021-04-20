@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
 
+const studentdataURL = "https://gist.githubusercontent.com/DetlefDmann/c602c97a486964da1f267bb665d8479b/raw/WincStudentData.csv"
+
 function App() {
   return (
     <div className="App">
