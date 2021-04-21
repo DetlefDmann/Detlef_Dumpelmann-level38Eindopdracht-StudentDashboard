@@ -2,15 +2,21 @@ import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
+import StudentData from './features/studentData/StudentData';
 
-const studentdataURL = "https://gist.githubusercontent.com/DetlefDmann/c602c97a486964da1f267bb665d8479b/raw/WincStudentData.csv"
 
 function App() {
+  
+
+  //if (data!==null){console.log(data[0])}
+  
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Counter />
+        <StudentData />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
