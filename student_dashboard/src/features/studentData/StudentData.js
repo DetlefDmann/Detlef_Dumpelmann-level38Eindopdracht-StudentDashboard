@@ -6,6 +6,7 @@ const StudentData = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
+        //deze data hoeft maar een keer opgehaald te worden
         dispatch(getDataFromGist());
     },[])
 

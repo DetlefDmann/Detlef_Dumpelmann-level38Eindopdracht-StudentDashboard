@@ -1,6 +1,5 @@
 import { csv } from "d3";
 
-//moet naar redux slice gestuurd worden
 const studentdataURL = "https://gist.githubusercontent.com/DetlefDmann/c602c97a486964da1f267bb665d8479b/raw/WincStudentData.csv"
 
 
@@ -9,4 +8,4 @@ export const fetchStudentData = () => {
     return csv(studentdataURL);
 }
 
-//deze functie aanroepen in studentDataSlice
+//deze functie wordt aangeroepen in studentDataSlice.js middels een asyncThunk

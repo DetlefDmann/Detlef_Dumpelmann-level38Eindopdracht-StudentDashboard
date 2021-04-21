@@ -9,6 +9,7 @@ const initialState = {
     status: "idle",
 }
 
+//met deze thunk kan de data opgehaald worden 
 export const getDataFromGist = createAsyncThunk(
     'studentData/getDataFromGist',
     async () => {
@@ -38,7 +39,7 @@ export const studentDataSlice = createSlice({
 
 export const { loadData } = studentDataSlice.actions;
 
-// om de data op te halen gebruik je de volgende functie (die een selector wordt genoemd) ,
+// om de data beschikbaar te maken gebruik je de volgende functie (die een selector wordt genoemd) ,
 //waarmee je een waarde uit de state kunt selecteren.
 export const selectData = (state) => state.studentData.data;
 
