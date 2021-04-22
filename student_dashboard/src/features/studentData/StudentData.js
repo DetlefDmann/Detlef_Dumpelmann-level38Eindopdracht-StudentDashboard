@@ -1,5 +1,6 @@
 import React, { useState , useEffect } from "react";
 import { useSelector , useDispatch } from 'react-redux';
+import Chart from "../../components/Chart";
 import { selectData , getDataFromGist } from "./studentDataSlice";
 
 const StudentData = () => {
@@ -14,7 +15,7 @@ const StudentData = () => {
     console.log(csvData)
     return (
         <div>
-            <h1>Hello teacher.</h1>
+            <Chart />
         </div>
     )
 }
