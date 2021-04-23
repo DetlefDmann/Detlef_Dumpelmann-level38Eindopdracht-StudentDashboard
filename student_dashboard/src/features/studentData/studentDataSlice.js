@@ -3,8 +3,11 @@ import { fetchStudentData } from "./studentDataAPI";
 
 const initialState = {
     data: [{
-        studentName:"Sarah Connor",
+        student:"Sarah Connor",
         destination:"fucked",
+        assignment:"SCRUM",
+        difficulty:"3",
+        funFactor:"2"
     }],
     status: "idle",
 }
@@ -13,7 +16,16 @@ const initialState = {
 export const getDataFromGist = createAsyncThunk(
     'studentData/getDataFromGist',
     async () => {
-        return await fetchStudentData(); 
+        const response = await fetchStudentData()
+        const cleanData = await response.map(row => {
+            return {
+                ...row,
+                difficulty :  +row.difficulty,
+                funFactor : +row.funFactor
+            }
+        });
+        return cleanData;
+        ; 
     }
 );
 
