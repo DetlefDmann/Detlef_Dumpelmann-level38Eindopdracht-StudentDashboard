@@ -46,17 +46,32 @@ const Chart = ({ student }) => {
                         <text style={{textAnchor:"end"}} dy=".5em" x="-.5em">{tickValue}</text>
                     </g>
                 ))};
-                <g transform={`translate(${-innerHeight + xOffset + margin.left + innerWidth/(filteredData.length*2)}, -10)`}>
-                {xScale.domain().map(tickValue => (
-                    <g key={`${tickValue}x`} transform={`translate(${xScale(tickValue)},0) `}>
-                        <text transform={`rotate(315)`} style={{textAnchor:"end"}} x={-margin.left} y={height}>{tickValue}</text>
-                    </g>
+                <g transform={`translate(${-innerHeight + xOffset + margin.left + innerWidth/(filteredData.length*2)}, -15)`}>
+                    {xScale.domain().map(tickValue => (
+                        <g key={`${tickValue}x`} transform={`translate(${xScale(tickValue)},0) `}>
+                            <text transform={`rotate(315)`} style={{textAnchor:"end"}} x={-margin.left} y={height}>{tickValue}</text>
+                        </g>
                 ))};
                 </g>
-                {filteredData.map((d,i) => <g key={`${i}rect`}>
-                    <rect key={i} x={xScale(d.assignment)+ xOffset} y={ innerHeight-d.funFactor*scaleToValues} width={(innerWidth/(filteredData.length*2.5))} height={d.funFactor*scaleToValues} className="funFactor" />
-                    <rect key={i+filteredData.length} x={xScale(d.assignment) + innerWidth/(filteredData.length*2)} y={ innerHeight-d.difficulty*scaleToValues} width={(innerWidth/(filteredData.length*2.5))} height={d.difficulty*scaleToValues} className="difficulty"/>
-                    </g>)
+                {filteredData.map((d,i) => (
+                    <g key={`${i}rect`}>
+                        <rect 
+                            key={i} 
+                            x={xScale(d.assignment)+ xOffset} 
+                            y={ innerHeight-d.funFactor*scaleToValues} 
+                            width={(innerWidth/(filteredData.length*2.5))} 
+                            height={d.funFactor*scaleToValues} 
+                            className="funFactor" 
+                        />
+                        <rect 
+                            key={i+filteredData.length} 
+                            x={xScale(d.assignment) + innerWidth/(filteredData.length*2)} 
+                            y={ innerHeight-d.difficulty*scaleToValues} 
+                            width={(innerWidth/(filteredData.length*2.5))} 
+                            height={d.difficulty*scaleToValues} 
+                            className="difficulty"
+                        />
+                    </g>))
                 }
             </g>
         </svg>
