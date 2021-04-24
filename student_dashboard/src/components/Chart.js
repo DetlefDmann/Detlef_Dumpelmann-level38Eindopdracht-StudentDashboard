@@ -1,6 +1,6 @@
 import React from 'react';
 import './Chart.css'
-import { scaleBand , scaleLinear , axisLeft , axisBottom } from 'd3'; 
+import { scaleBand , scaleLinear } from 'd3'; 
 import { useSelector } from 'react-redux';
 import { selectData } from "../features/studentData/studentDataSlice";
 
@@ -23,7 +23,6 @@ const Chart = ({ student }) => {
     const margin = { top:20 , right:20 , bottom:120 , left: 40};
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
-    const axisHeight = innerHeight + 10;
 
     //Om een of andere reden moet de data opgeschaald worden:
     const scaleToValues = 68;
@@ -36,14 +35,7 @@ const Chart = ({ student }) => {
                     .domain([0, 5])
                     .range([innerHeight , margin.top ]);
 
-    const xOffset = width/filteredData.length*2 - innerWidth/filteredData.length*2
-
-    const x_as = axisBottom()
-                    .scale(xScale);
-
-    const y_as = axisLeft()
-                    .scale(yScale); 
-        
+    const xOffset = width/filteredData.length*2 - innerWidth/filteredData.length*2        
 
     return (
         <svg width={width} height={height} className="chartcontainer">
