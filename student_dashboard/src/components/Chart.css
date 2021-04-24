@@ -1,0 +1,17 @@
+text {
+    font-size: small;
+}
+
+.funFactor {
+    fill: rgb(215, 255, 39);
+    stroke: rgba(162, 173, 7, 0.8);
+}
+
+.difficulty {
+    fill:rgb(248, 171, 5);
+    stroke:rgb(226, 101, 43);
+}
+
+.chartcontainer {
+    background-color: burlywood;
+}
