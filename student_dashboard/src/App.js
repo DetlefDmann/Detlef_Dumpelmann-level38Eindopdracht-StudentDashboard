@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector , useDispatch } from 'react-redux';
-import { selectData , getDataFromGist, setStudentNames, setAssignments } from "./features/studentData/studentDataSlice";
+import { selectData , getDataFromGist, setStudentNames, setAssignments, selectStudents } from "./features/studentData/studentDataSlice";
 import { BrowserRouter as Router ,Switch, Route } from 'react-router-dom';
 import './App.css';
 import StudentData from './features/studentData/StudentData';
@@ -11,22 +11,22 @@ import { retrieveUniqueElements } from './utils';
 
 function App() {
   const dispatch = useDispatch();
+  const data = useSelector(selectData);
 
   useEffect(() => {
     //deze data hoeft maar een keer opgehaald te worden
     dispatch(getDataFromGist());
   },[]);
-  const data = useSelector(selectData);
-  let studentNames = [];
-  let assignmentNames =[];
+  
+
   useEffect(() => {
-    assignmentNames = retrieveUniqueElements(data , "assignment");
-    studentNames = retrieveUniqueElements(data , "student");
+    let assignmentNames = retrieveUniqueElements(data , "assignment");
+    let studentNames = retrieveUniqueElements(data , "student");
     dispatch(setStudentNames(studentNames));
     dispatch(setAssignments(assignmentNames));
   }, [data]);
  
-
+  const studentNames = useSelector(selectStudents);
 
   
   console.log(data[0]['assignment'])
