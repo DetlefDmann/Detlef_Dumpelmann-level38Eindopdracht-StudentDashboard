@@ -1,6 +1,6 @@
 import React from 'react';
 import './Chart.css'
-import { scaleBand , scaleLinear , axisLeft , axisBottom, select , format, ticks , tickFormat, max, line } from 'd3'; 
+import { scaleBand , scaleLinear , axisLeft , axisBottom } from 'd3'; 
 import { useSelector } from 'react-redux';
 import { selectData } from "../features/studentData/studentDataSlice";
 
@@ -42,49 +42,29 @@ const Chart = ({ student }) => {
                     .scale(xScale);
 
     const y_as = axisLeft()
-                    .scale(yScale);
-
-    //const tickFormat = yScale.tickFormat(5)
-
-    //maak de y-as
-    // select('svg').append("g")
-    //     .attr("transform", `translate(${margin.left},${margin.top})`)
-    //     .attr("key","1434")
-    //     .call(y_as)
-
-    //maak de x-as
-    // select('svg').append("g")
-    //     .attr("transform", `translate(${margin.left}, ${innerHeight + margin.top})`)
-    //     .attr("key","1439")
-    //     .call(x_as)
-    //     .selectAll("text")
-    //     .attr("transform", `rotate(320) translate(0,0)`)
-    //     .attr("key","143")
-    //     .style("text-anchor", "end");
-
-        
+                    .scale(yScale); 
         
 
     return (
         <svg width={width} height={height} className="chartcontainer">
             <g transform={`translate(${margin.left},${margin.top})`}>
                 {yScale.ticks().map(tickValue => (
-                    <g transform={`translate(0, ${yScale(tickValue)})`}>
+                    <g key={`${tickValue}y`} transform={`translate(0, ${yScale(tickValue)})`}>
                         <line  x2={innerWidth} stroke="grey" />
                         <text style={{textAnchor:"end"}} dy=".5em" x="-.5em">{tickValue}</text>
                     </g>
                 ))};
                 <g transform={`translate(${-innerHeight + xOffset + margin.left + innerWidth/(filteredData.length*2)}, -10)`}>
                 {xScale.domain().map(tickValue => (
-                    <g transform={`translate(${xScale(tickValue)},0) `}>
+                    <g key={`${tickValue}x`} transform={`translate(${xScale(tickValue)},0) `}>
                         <text transform={`rotate(315)`} style={{textAnchor:"end"}} x={-margin.left} y={height}>{tickValue}</text>
                     </g>
                 ))};
                 </g>
-                {filteredData.map((d,i) => <>
+                {filteredData.map((d,i) => <g key={`${i}rect`}>
                     <rect key={i} x={xScale(d.assignment)+ xOffset} y={ innerHeight-d.funFactor*scaleToValues} width={(innerWidth/(filteredData.length*2.5))} height={d.funFactor*scaleToValues} className="funFactor" />
                     <rect key={i+filteredData.length} x={xScale(d.assignment) + innerWidth/(filteredData.length*2)} y={ innerHeight-d.difficulty*scaleToValues} width={(innerWidth/(filteredData.length*2.5))} height={d.difficulty*scaleToValues} className="difficulty"/>
-                    </>)
+                    </g>)
                 }
             </g>
         </svg>
