@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useSelector , useDispatch } from 'react-redux';
-import { selectData , getDataFromGist, setStudentNames } from "./features/studentData/studentDataSlice";
+import { selectData , getDataFromGist, setStudentNames, setAssignments } from "./features/studentData/studentDataSlice";
 import { BrowserRouter as Router ,Switch, Route } from 'react-router-dom';
 import './App.css';
 import StudentData from './features/studentData/StudentData';
 import Header from './components/Header';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
+import { retrieveUniqueElements } from './utils';
 
 function App() {
   const dispatch = useDispatch();
@@ -15,17 +16,20 @@ function App() {
     //deze data hoeft maar een keer opgehaald te worden
     dispatch(getDataFromGist());
   },[]);
-  
   const data = useSelector(selectData);
-  const studentNames = [];
-  data.forEach(element => {
-    if(!studentNames.includes(element.student)){
-      studentNames.push(element.student)
-    }
-  });
+  let studentNames = [];
+  let assignmentNames =[];
+  useEffect(() => {
+    assignmentNames = retrieveUniqueElements(data , "assignment");
+    studentNames = retrieveUniqueElements(data , "student");
+    dispatch(setStudentNames(studentNames));
+    dispatch(setAssignments(assignmentNames));
+  }, [data]);
+ 
 
-  dispatch(setStudentNames(studentNames));
-  console.log(studentNames)
+
+  
+  console.log(data[0]['assignment'])
   const routesJSX = studentNames.map(student => {
     return (
       <Route key={student} path={`/${student}`} >

@@ -9,7 +9,8 @@ const initialState = {
         funFactor:2,
     }],
     status: "idle",
-    students:[]
+    students:[],
+    assignments:[],
 }
 
 //met deze thunk kan de data opgehaald worden 
@@ -17,6 +18,7 @@ export const getDataFromGist = createAsyncThunk(
     'studentData/getDataFromGist',
     async () => {
         const response = await fetchStudentData()
+        //hier maak je van een string een number
         const cleanData = await response.map(row => {
             return {
                 ...row,
@@ -38,6 +40,9 @@ export const studentDataSlice = createSlice({
         },
         setStudentNames: (state , action ) => {
             state.students = action.payload;
+        },
+        setAssignments: (state , action ) => {
+            state.assignments = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -52,7 +57,7 @@ export const studentDataSlice = createSlice({
     },
 });
 
-export const { loadData , setStudentNames } = studentDataSlice.actions;
+export const { loadData , setStudentNames , setAssignments } = studentDataSlice.actions;
 
 // om de data beschikbaar te maken gebruik je de volgende functie (die een selector wordt genoemd) ,
 //waarmee je een waarde uit de state kunt selecteren.
