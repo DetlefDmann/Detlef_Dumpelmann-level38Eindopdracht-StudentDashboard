@@ -4,12 +4,12 @@ import { fetchStudentData } from "./studentDataAPI";
 const initialState = {
     data: [{
         student:"Sarah Connor",
-        destination:"fucked",
         assignment:"SCRUM",
-        difficulty:"3",
-        funFactor:"2"
+        difficulty:3,
+        funFactor:2,
     }],
     status: "idle",
+    students:[]
 }
 
 //met deze thunk kan de data opgehaald worden 
@@ -35,6 +35,9 @@ export const studentDataSlice = createSlice({
     reducers:{
         loadData: (state) => {
             state.data = []
+        },
+        setStudentNames: (state , action ) => {
+            state.students = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -49,10 +52,11 @@ export const studentDataSlice = createSlice({
     },
 });
 
-export const { loadData } = studentDataSlice.actions;
+export const { loadData , setStudentNames } = studentDataSlice.actions;
 
 // om de data beschikbaar te maken gebruik je de volgende functie (die een selector wordt genoemd) ,
 //waarmee je een waarde uit de state kunt selecteren.
 export const selectData = (state) => state.studentData.data;
+export const selectStudents = (state) => state.studentData.students;
 
 export default studentDataSlice.reducer;

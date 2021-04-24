@@ -1,21 +1,15 @@
-import React, { useState , useEffect } from "react";
-import { useSelector , useDispatch } from 'react-redux';
+import React from "react";
+import { useSelector } from 'react-redux';
 import Chart from "../../components/Chart";
-import { selectData , getDataFromGist } from "./studentDataSlice";
+import { selectData  } from "./studentDataSlice";
 
-const StudentData = () => {
-    const dispatch = useDispatch()
+const StudentData = ({student}) => {
 
-    useEffect(() => {
-        //deze data hoeft maar een keer opgehaald te worden
-        dispatch(getDataFromGist());
-    },[])
-
-    const csvData = useSelector(selectData);
-    console.log(csvData)
+    // const csvData = useSelector(selectData);
+    // console.log(csvData)
     return (
         <div>
-            <Chart />
+            <Chart student={student}/>
         </div>
     )
 }
