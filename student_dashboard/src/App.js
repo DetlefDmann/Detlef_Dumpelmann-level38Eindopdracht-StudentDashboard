@@ -4,6 +4,7 @@ import { selectData , getDataFromGist, setStudentNames, setAssignments, selectSt
 import { BrowserRouter as Router ,Switch, Route } from 'react-router-dom';
 import './App.css';
 import StudentData from './features/studentData/StudentData';
+import Home from './components/Home'                 
 import Header from './components/Header';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
@@ -26,11 +27,11 @@ function App() {
     dispatch(setAssignments(assignmentNames));
   }, [data]);
  
-  const studentNames = useSelector(selectStudents);
+  const studentNames = useSelector(selectStudents)
 
   
   console.log(data[0]['assignment'])
-  const routesJSX = studentNames.map(student => {
+  const studentPagesJSX = studentNames.map(student => {
     return (
       <Route key={student} path={`/${student}`} >
         <StudentData student={`${student}`} />
@@ -45,12 +46,10 @@ function App() {
         <Header />
         <NavBar />
           <Switch>
-          
-              {routesJSX}
+              {studentPagesJSX}
               <Route path='/'>
-                <StudentData />
+                <Home />
               </Route>
-            
           </Switch>
         <Footer />
       </Router>
