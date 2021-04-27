@@ -51,7 +51,7 @@ export const studentDataSlice = createSlice({
                 state.status = "loading";
             })
             .addCase(getDataFromGist.fulfilled, (state, action) => {
-                state.status = "idle";
+                state.status = "ready";
                 state.data = action.payload;
             });
     },
@@ -63,5 +63,7 @@ export const { loadData , setStudentNames , setAssignments } = studentDataSlice.
 //waarmee je een waarde uit de state kunt selecteren.
 export const selectData = (state) => state.studentData.data;
 export const selectStudents = (state) => state.studentData.students;
+export const selectAssignments = (state) => state.studentData.assignments;
+export const selectLoadingStatus = (state) => state.studentData.status;
 
 export default studentDataSlice.reducer;
