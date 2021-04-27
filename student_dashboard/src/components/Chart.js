@@ -25,7 +25,7 @@ const Chart = ({ student }) => {
     const innerHeight = height - margin.top - margin.bottom;
 
     //Om een of andere reden moet de data opgeschaald worden:
-    const scaleToValues = 68;
+    const scaleToValues = innerHeight/5;
     const xScale = scaleBand()
                     .domain( filteredData.map(d => d.assignment))
                     .range([0 , innerWidth])
@@ -33,9 +33,9 @@ const Chart = ({ student }) => {
                 
     const yScale = scaleLinear()
                     .domain([0, 5])
-                    .range([innerHeight , margin.top ]);
+                    .range([innerHeight ,0 ]);
 
-    const xOffset = width/filteredData.length*2 - innerWidth/filteredData.length*2        
+    const xOffset = (width - innerWidth)/filteredData.length*2        
 
     return (
         <svg width={width} height={height} className="chartcontainer">
@@ -46,10 +46,10 @@ const Chart = ({ student }) => {
                         <text style={{textAnchor:"end"}} dy=".5em" x="-.5em">{tickValue}</text>
                     </g>
                 ))};
-                <g transform={`translate(${-innerHeight + xOffset + margin.left + innerWidth/(filteredData.length*2)}, -15)`}>
+                <g transform={`translate(${-innerHeight + margin.left + innerWidth/(filteredData.length*2)}, -15)`}>
                     {xScale.domain().map(tickValue => (
                         <g key={`${tickValue}x`} transform={`translate(${xScale(tickValue)},0) `}>
-                            <text transform={`rotate(315)`} style={{textAnchor:"end"}} x={-margin.left} y={height}>{tickValue}</text>
+                            <text transform={`rotate(315)`} style={{textAnchor:"end"}} x={-margin.left} y={innerHeight*Math.sqrt(2)}>{tickValue}</text>
                         </g>
                 ))};
                 </g>
@@ -62,6 +62,7 @@ const Chart = ({ student }) => {
                             width={(innerWidth/(filteredData.length*2.5))} 
                             height={d.funFactor*scaleToValues} 
                             className="funFactor" 
+                            title={d.funFactor}
                         />
                         <rect 
                             key={i+filteredData.length} 
