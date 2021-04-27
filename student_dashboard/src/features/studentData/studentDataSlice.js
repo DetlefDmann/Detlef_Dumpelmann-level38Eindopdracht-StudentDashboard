@@ -19,7 +19,7 @@ export const getDataFromGist = createAsyncThunk(
     async () => {
         const response = await fetchStudentData()
         //hier maak je van een string een number
-        const cleanData = await response.map(row => {
+        const cleanData = response.map(row => {
             return {
                 ...row,
                 difficulty :  +row.difficulty,
