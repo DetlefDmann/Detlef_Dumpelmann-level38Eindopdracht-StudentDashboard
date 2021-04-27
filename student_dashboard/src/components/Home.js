@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
-import Chart2 from './Chart2'
-import {calculateAverage, filterArrayByKey} from '../utils'
 import { useSelector } from 'react-redux'
+import {calculateAverage, filterArrayByKey} from '../utils'
 import { selectAssignments, selectData, selectStudents, selectLoadingStatus } from '../features/studentData/studentDataSlice'
+import Chart2 from './Chart2'
+import FilterSelector from './FilterSelector'
 
 
 const Home = ({student}) => {
@@ -23,7 +24,8 @@ const Home = ({student}) => {
     return (
         <main>
             <h1>Dit is het overzicht.</h1>
-            <Chart2 student={student}/>
+            <Chart2 student={student} />
+            <FilterSelector/>
             <h2>Hier een tabel plaatsen met de data uit de sheet</h2>
         </main>
     )
