@@ -8,7 +8,7 @@ const NavBar = () => {
     console.log("Studenten navbar" + studentNames)
     const linksJSX = studentNames.map(studentName => {
         return (
-        <li>
+        <li key={`${studentName}linkitem`}>
             <Link to={`${studentName}`}>{studentName}</Link>
         </li>)
     });

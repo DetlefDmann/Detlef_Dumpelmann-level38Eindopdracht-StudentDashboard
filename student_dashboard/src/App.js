@@ -1,32 +1,37 @@
 import React, { useEffect } from 'react';
 import { useSelector , useDispatch } from 'react-redux';
-import { selectData , getDataFromGist, setStudentNames } from "./features/studentData/studentDataSlice";
+import { selectData , getDataFromGist, setStudentNames, setAssignments, selectStudents } from "./features/studentData/studentDataSlice";
 import { BrowserRouter as Router ,Switch, Route } from 'react-router-dom';
 import './App.css';
 import StudentData from './features/studentData/StudentData';
+import Home from './components/Home'                 
 import Header from './components/Header';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
+import { retrieveUniqueElements } from './utils';
 
 function App() {
   const dispatch = useDispatch();
+  const data = useSelector(selectData);
 
   useEffect(() => {
     //deze data hoeft maar een keer opgehaald te worden
     dispatch(getDataFromGist());
   },[]);
   
-  const data = useSelector(selectData);
-  const studentNames = [];
-  data.forEach(element => {
-    if(!studentNames.includes(element.student)){
-      studentNames.push(element.student)
-    }
-  });
 
-  dispatch(setStudentNames(studentNames));
-  console.log(studentNames)
-  const routesJSX = studentNames.map(student => {
+  useEffect(() => {
+    let assignmentNames = retrieveUniqueElements(data , "assignment");
+    let studentNames = retrieveUniqueElements(data , "student");
+    dispatch(setStudentNames(studentNames));
+    dispatch(setAssignments(assignmentNames));
+  }, [data]);
+ 
+  const studentNames = useSelector(selectStudents)
+
+  
+  console.log(data[0]['assignment'])
+  const studentPagesJSX = studentNames.map(student => {
     return (
       <Route key={student} path={`/${student}`} >
         <StudentData student={`${student}`} />
@@ -41,12 +46,10 @@ function App() {
         <Header />
         <NavBar />
           <Switch>
-          
-              {routesJSX}
+              {studentPagesJSX}
               <Route path='/'>
-                <StudentData />
+                <Home />
               </Route>
-            
           </Switch>
         <Footer />
       </Router>
