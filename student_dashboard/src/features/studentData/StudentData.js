@@ -1,16 +1,14 @@
 import React from "react";
-import { useSelector } from 'react-redux';
 import Chart from "../../components/Chart";
-import { selectData  } from "./studentDataSlice";
 
 const StudentData = ({student}) => {
+    // Hier willen we wat informatie over de student neer zetten,
+    //wanneer we op de homepage zijn willen we juist algemene informatie weergeven.
 
-    // const csvData = useSelector(selectData);
-    // console.log(csvData)
     return (
-        <div>
+        <main>
             <Chart student={student}/>
-        </div>
+        </main>
     )
 }
 
