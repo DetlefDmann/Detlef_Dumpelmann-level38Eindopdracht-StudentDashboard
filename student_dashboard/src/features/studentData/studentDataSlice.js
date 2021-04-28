@@ -10,7 +10,8 @@ const initialState = {
     }],
     status: "idle",
     students:[],
-    assignments:[],
+    assignments:["SCRUM"],
+    averages:[]
 }
 
 //met deze thunk kan de data opgehaald worden 
@@ -43,6 +44,9 @@ export const studentDataSlice = createSlice({
         },
         setAssignments: (state , action ) => {
             state.assignments = action.payload;
+        },
+        setAverageArray: (state , action ) => {
+            state.averages = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -57,13 +61,14 @@ export const studentDataSlice = createSlice({
     },
 });
 
-export const { loadData , setStudentNames , setAssignments } = studentDataSlice.actions;
+export const { loadData , setStudentNames , setAssignments , setAverageArray } = studentDataSlice.actions;
 
 // om de data beschikbaar te maken gebruik je de volgende functie (die een selector wordt genoemd) ,
 //waarmee je een waarde uit de state kunt selecteren.
 export const selectData = (state) => state.studentData.data;
 export const selectStudents = (state) => state.studentData.students;
 export const selectAssignments = (state) => state.studentData.assignments;
+export const selectAverageArray = (state) => state.studentData.averages;
 export const selectLoadingStatus = (state) => state.studentData.status;
 
 export default studentDataSlice.reducer;

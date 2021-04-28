@@ -1,25 +1,26 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector , useDispatch } from 'react-redux'
 import {calculateAverage, filterArrayByKey} from '../utils'
-import { selectAssignments, selectData, selectStudents, selectLoadingStatus } from '../features/studentData/studentDataSlice'
+import { selectAssignments, selectData, selectStudents, selectLoadingStatus, setAverageArray } from '../features/studentData/studentDataSlice'
 import Chart2 from './Chart2'
 import FilterSelector from './FilterSelector'
 
 
 const Home = ({student}) => {
+    const dispatch = useDispatch()
     const data = useSelector(selectData);
     const allStudents = useSelector(selectStudents);
     const allAssignments = useSelector(selectAssignments);
     const loadingStatus = useSelector(selectLoadingStatus);
-    let totalAverages = [];
+    
     useEffect(() =>{
+        
         if(loadingStatus==="ready" && allStudents.length>2){
-        totalAverages = allAssignments.map(assignment =>{
-            return calculateAverage(filterArrayByKey(data, "assignment", assignment))
-            });
-        }
-        console.log(totalAverages)
-    },[data]);
+        console.log("ready")
+        };
+        
+    
+    },[data , allAssignments , loadingStatus]);
     
     return (
         <main>

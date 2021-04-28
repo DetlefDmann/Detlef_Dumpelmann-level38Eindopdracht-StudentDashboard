@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector , useDispatch } from 'react-redux';
-import { selectData , getDataFromGist, setStudentNames, setAssignments, selectStudents } from "./features/studentData/studentDataSlice";
+import { selectData , getDataFromGist, setStudentNames, setAssignments, selectStudents, setAverageArray, selectLoadingStatus } from "./features/studentData/studentDataSlice";
 import { BrowserRouter as Router ,Switch, Route } from 'react-router-dom';
 import './App.css';
 import StudentData from './features/studentData/StudentData';
@@ -8,11 +8,12 @@ import Home from './components/Home'
 import Header from './components/Header';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
-import { retrieveUniqueElements } from './utils';
+import { retrieveUniqueElements , calculateAverage , filterArrayByKey } from './utils';
 
 function App() {
   const dispatch = useDispatch();
   const data = useSelector(selectData);
+  const loadingStatus = useSelector(selectLoadingStatus);
 
   useEffect(() => {
     //deze data hoeft maar een keer opgehaald te worden
@@ -21,10 +22,16 @@ function App() {
   
 
   useEffect(() => {
-    let assignmentNames = retrieveUniqueElements(data , "assignment");
-    let studentNames = retrieveUniqueElements(data , "student");
+    if(loadingStatus==="ready"){
+    const assignmentNames = retrieveUniqueElements(data , "assignment");
+    const studentNames = retrieveUniqueElements(data , "student");
+    const totalAverages = assignmentNames.map(assignment =>{
+      return calculateAverage(filterArrayByKey(data, "assignment", assignment))
+      });
     dispatch(setStudentNames(studentNames));
     dispatch(setAssignments(assignmentNames));
+    dispatch(setAverageArray(totalAverages));
+    }
   }, [data]);
  
   const studentNames = useSelector(selectStudents)
