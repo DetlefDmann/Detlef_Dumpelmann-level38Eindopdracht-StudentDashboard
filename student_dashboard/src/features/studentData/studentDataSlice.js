@@ -11,7 +11,8 @@ const initialState = {
     status: "idle",
     students:[],
     assignments:["SCRUM"],
-    averages:[]
+    averages:[],
+    isChecked:{"Hallo":true}
 }
 
 //met deze thunk kan de data opgehaald worden 
@@ -47,6 +48,9 @@ export const studentDataSlice = createSlice({
         },
         setAverageArray: (state , action ) => {
             state.averages = action.payload;
+        },
+        setIsChecked: (state , action ) => {
+            state.isChecked = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -61,7 +65,7 @@ export const studentDataSlice = createSlice({
     },
 });
 
-export const { loadData , setStudentNames , setAssignments , setAverageArray } = studentDataSlice.actions;
+export const { loadData , setStudentNames , setAssignments , setAverageArray , setIsChecked } = studentDataSlice.actions;
 
 // om de data beschikbaar te maken gebruik je de volgende functie (die een selector wordt genoemd) ,
 //waarmee je een waarde uit de state kunt selecteren.
@@ -70,5 +74,6 @@ export const selectStudents = (state) => state.studentData.students;
 export const selectAssignments = (state) => state.studentData.assignments;
 export const selectAverageArray = (state) => state.studentData.averages;
 export const selectLoadingStatus = (state) => state.studentData.status;
+export const selectIsChecked = (state) => state.studentData.isChecked;
 
 export default studentDataSlice.reducer;
