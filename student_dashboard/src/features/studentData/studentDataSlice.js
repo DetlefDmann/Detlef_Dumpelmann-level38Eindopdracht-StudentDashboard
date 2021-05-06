@@ -12,7 +12,9 @@ const initialState = {
     students:[],
     assignments:["SCRUM"],
     averages:[],
-    isChecked:{"Hallo":true}
+    assignmentsIsChecked:{"Hallo":true},
+    studentsIsChecked:{"Sarah Connor":true},
+    arraysPerStudent:{"Sarah Connor":[]}
 }
 
 //met deze thunk kan de data opgehaald worden 
@@ -49,8 +51,14 @@ export const studentDataSlice = createSlice({
         setAverageArray: (state , action ) => {
             state.averages = action.payload;
         },
-        setIsChecked: (state , action ) => {
-            state.isChecked = action.payload;
+        setAssignmentsIsChecked: (state , action ) => {
+            state.assignmentsIsChecked = action.payload;
+        },
+        setStudentsIsChecked: (state , action ) => {
+            state.studentsIsChecked = action.payload;
+        },
+        setArraysPerStudent: (state , action ) => {
+            state.arraysPerStudent = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -65,7 +73,7 @@ export const studentDataSlice = createSlice({
     },
 });
 
-export const { loadData , setStudentNames , setAssignments , setAverageArray , setIsChecked } = studentDataSlice.actions;
+export const { loadData , setStudentNames , setAssignments , setAverageArray , setAssignmentsIsChecked , setStudentsIsChecked , setArraysPerStudent} = studentDataSlice.actions;
 
 // om de data beschikbaar te maken gebruik je de volgende functie (die een selector wordt genoemd) ,
 //waarmee je een waarde uit de state kunt selecteren.
@@ -74,6 +82,8 @@ export const selectStudents = (state) => state.studentData.students;
 export const selectAssignments = (state) => state.studentData.assignments;
 export const selectAverageArray = (state) => state.studentData.averages;
 export const selectLoadingStatus = (state) => state.studentData.status;
-export const selectIsChecked = (state) => state.studentData.isChecked;
+export const selectAssignmentsIsChecked = (state) => state.studentData.assignmentsIsChecked;
+export const selectStudentsIsChecked = (state) => state.studentData.studentsIsChecked;
+export const selectArrayPerStudent = (state) => state.studentData.arraysPerStudent;
 
 export default studentDataSlice.reducer;

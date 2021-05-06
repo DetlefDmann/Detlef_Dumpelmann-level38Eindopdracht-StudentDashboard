@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector , useDispatch } from 'react-redux';
-import { selectData , getDataFromGist, setStudentNames, setAssignments, selectStudents, setAverageArray, selectLoadingStatus, setIsChecked } from "./features/studentData/studentDataSlice";
+import { selectData , getDataFromGist, setStudentNames, setAssignments, selectStudents, setAverageArray, selectLoadingStatus, setAssignmentsIsChecked , selectStudentsIsChecked, setStudentsIsChecked, selectAssignmentsIsChecked, setArraysPerStudent, selectArrayPerStudent, } from "./features/studentData/studentDataSlice";
 import { BrowserRouter as Router ,Switch, Route } from 'react-router-dom';
 import './App.css';
 import StudentData from './features/studentData/StudentData';
@@ -14,33 +14,89 @@ function App() {
   const dispatch = useDispatch();
   const data = useSelector(selectData);
   const loadingStatus = useSelector(selectLoadingStatus);
-  const [isCheckedState , setIsCheckedState ] = useState({});
+  const studentChecked = useSelector(selectStudentsIsChecked);
+  const assignmentChecked = useSelector(selectAssignmentsIsChecked);
+  const assignmentsPerStudent = useSelector(selectArrayPerStudent);
   
   useEffect(() => {
     //deze data hoeft maar een keer opgehaald te worden
     dispatch(getDataFromGist());
   },[]);
   
-    
-
   useEffect(() => {
     if(loadingStatus==="ready"){
-    const assignmentNames = retrieveUniqueElements(data , "assignment");
-    const studentNamesArray = retrieveUniqueElements(data , "student");
-    const allKeys = assignmentNames.concat(studentNamesArray);
-    const checkedObject = allKeys.reduce((acc,current) => ({...acc,[current]:true}),{});
+    const assignmentNamesArray = retrieveUniqueElements(data , "assignment");//array met alle assignments
+    const studentNamesArray = retrieveUniqueElements(data , "student");//array met alle studenten
+    //array van opdrachten per student maken . Ik kon geen betrouwbare manier vinden om dynamisch nieuwe variabelen aan te maken, dus het volgende is niet DRY
+      dispatch(setArraysPerStudent({
+        [studentNamesArray[0]] : filterArrayByKey(data , "student", studentNamesArray[0]),
+        [studentNamesArray[1]] : filterArrayByKey(data , "student", studentNamesArray[1]),
+        [studentNamesArray[2]] : filterArrayByKey(data , "student", studentNamesArray[2]),
+        [studentNamesArray[3]] : filterArrayByKey(data , "student", studentNamesArray[3]),
+        [studentNamesArray[4]] : filterArrayByKey(data , "student", studentNamesArray[4]),
+        [studentNamesArray[5]] : filterArrayByKey(data , "student", studentNamesArray[5]),
+        [studentNamesArray[6]] : filterArrayByKey(data , "student", studentNamesArray[6]),
+        [studentNamesArray[7]] : filterArrayByKey(data , "student", studentNamesArray[7]),
+        [studentNamesArray[8]] : filterArrayByKey(data , "student", studentNamesArray[8]),
+        [studentNamesArray[9]] : filterArrayByKey(data , "student", studentNamesArray[9])
+      }));
+
+    const checkedStudentsObject = studentNamesArray.reduce((acc,current) => ({...acc,[current]:true}),{});
+    const checkedAssignmentsObject = assignmentNamesArray.reduce((acc,current) => ({...acc,[current]:true}),{});
     //leeg object aan het eind is nodig om acc te initialiseren als object
     //wanneer je dat niet doet, dan wordt de eerste string in stukken gehakt...
     
-    const totalAverages = assignmentNames.map(assignment =>{
+    dispatch(setAssignmentsIsChecked(checkedAssignmentsObject));
+    dispatch(setStudentsIsChecked(checkedStudentsObject))
+    dispatch(setStudentNames(studentNamesArray));        
+
+    const totalAverages = assignmentNamesArray.map(assignment =>{
       return calculateAverage(filterArrayByKey(data, "assignment", assignment))
       });
-    dispatch(setStudentNames(studentNamesArray));
-    dispatch(setAssignments(assignmentNames));
+    
     dispatch(setAverageArray(totalAverages));
-    dispatch(setIsChecked(checkedObject));
+    dispatch(setAssignments(assignmentNamesArray));
     }
-  }, [data]);
+  }, [data, loadingStatus]);
+
+  useEffect(()=>{
+    // Hier filteren welke data uitgerekend moet worden
+
+    //filteren op student
+    let filteredByStudent = [];
+    for (const key in studentChecked) {
+      if (studentChecked[key]) {
+        filteredByStudent = filteredByStudent.concat(assignmentsPerStudent[key])
+        console.log("Dit wordt er toegevoegd: " + assignmentsPerStudent[key])
+        console.log(key)
+        console.log(studentChecked[key])
+        console.log(filteredByStudent)
+      }
+      else console.log("Student checked key: " + studentChecked[key])
+    }
+
+    //dan filteren op assignment
+    console.log("Dit is filteredByStudent na de for loop : " + filteredByStudent)
+
+        //maak een array met de assignments die aangevinkt zijn
+        let filteredAssignmentsArray = [];
+        for (const key in assignmentChecked) {
+            if (assignmentChecked[key]) {
+              filteredAssignmentsArray.push(key)
+            }
+            else console.log(key + " not added to query.")
+        }
+
+         // voor deze assignments gaan we het gemiddelde berekenen en opslaan in Redux     
+        if (loadingStatus==="ready"&&filteredByStudent.length>1) {
+           const totalAverages = filteredAssignmentsArray.map(assignment =>{
+                return calculateAverage(filterArrayByKey(filteredByStudent, "assignment", assignment))
+                });
+              
+              dispatch(setAverageArray(totalAverages));
+        }
+                              
+  },[assignmentChecked, studentChecked])
  
   const studentNames = useSelector(selectStudents)
 

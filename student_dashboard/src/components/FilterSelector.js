@@ -1,22 +1,31 @@
 import React from 'react'
 import { useSelector , useDispatch} from 'react-redux'
-import { selectAssignments, selectIsChecked, selectStudents , setIsChecked } from '../features/studentData/studentDataSlice'
+import { selectAssignments, selectAssignmentsIsChecked, selectStudentsIsChecked, selectStudents , setStudentsIsChecked , setAssignmentsIsChecked} from '../features/studentData/studentDataSlice'
 import { v4 as uuid } from 'uuid';
 
 const FilterSelector = () => {
 const students = useSelector(selectStudents);
 const assignments = useSelector(selectAssignments);
-const isChecked = useSelector(selectIsChecked); 
+const studentIsChecked = useSelector(selectStudentsIsChecked);
+const assignmentIsChecked = useSelector(selectAssignmentsIsChecked);
 const dispatch = useDispatch();
 
-const inputHandler = (e) => {
+const studentInputHandler = (e) => {
     const {name, checked} = e.target
     console.log(checked + name);
-    dispatch(setIsChecked({
-        ...isChecked, [name]:checked
+    dispatch(setStudentsIsChecked({
+        ...studentIsChecked, [name]:checked
+    }))
+}
+const assignmentInputHandler = (e) => {
+    const {name, checked} = e.target
+    console.log(checked + name);
+    dispatch(setAssignmentsIsChecked({
+        ...assignmentIsChecked, [name]:checked
     }))
 }
 
+//checkboxen voor de studenten
 const studentInputsJsx = students.map(student => {
     return (
         <React.Fragment key={uuid()}>
@@ -24,11 +33,13 @@ const studentInputsJsx = students.map(student => {
                 type="checkbox" 
                 name={student} 
                 id={student} 
-                checked={isChecked[student]} 
-                onChange={inputHandler}/>
+                checked={studentIsChecked[student]} 
+                onChange={studentInputHandler}/>
             <label htmlFor={student}>{student}</label>
         </React.Fragment>)
 });
+
+//checkboxen voor de opdrachten
 const assignmentsInputJSX = assignments.map(assignment => {
     return (
         <React.Fragment key={uuid()}>
@@ -36,8 +47,8 @@ const assignmentsInputJSX = assignments.map(assignment => {
                 type="checkbox" 
                 name={assignment} 
                 id={assignment} 
-                checked={isChecked[assignment]}
-                onChange={inputHandler}/>
+                checked={assignmentIsChecked[assignment]}
+                onChange={assignmentInputHandler}/>
             <label htmlFor={assignment}>{assignment}</label>
         </React.Fragment>
     )

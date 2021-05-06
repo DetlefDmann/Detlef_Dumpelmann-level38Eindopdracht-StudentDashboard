@@ -1,27 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Chart.css'
 import { scaleBand , scaleLinear , ticks } from 'd3'; 
 import { useSelector } from 'react-redux';
-import { selectAverageArray, selectData } from "../features/studentData/studentDataSlice";
+import { selectAverageArray, selectData, selectAssignmentsIsChecked, selectLoadingStatus } from "../features/studentData/studentDataSlice";
 
 
 
 const Chart2 = ({ student }) => {
-    let data = [];
-    let averages = [];
-    data = useSelector(selectData);
-    averages = useSelector(selectAverageArray);
-    let filteredData = averages;
+    const data = useSelector(selectData);
+    const averages = useSelector(selectAverageArray);
+    const [filteredData, setFilteredData] = useState(averages);
+
+    let loadingStatus = "idle"
+    
+    let selectedAssignments = useSelector(selectAssignmentsIsChecked);// dit is een object met booleans for iedere assignment
+    loadingStatus = useSelector(selectLoadingStatus);
 
     useEffect(() => {
         if( typeof student!=="undefined"){
-            filteredData = data.filter(d => d.student===student);
+            console.log("Student is defined?")
+            //setFilteredData(data.filter(d => d.student===student));
         }
-        else {
-            //filteredData = averages.slice(0,56);
+        else if(loadingStatus==="ready"){
+            
+            //         let newfilteredData = filteredData.filter(datapoint => {
+            //             return filterValues[datapoint.assignment]!==true
+            //         });
+        
+             console.log(filteredData)
+             setFilteredData(averages);
+
             //hier kunnen de methodes voor de home page komen
-        };
-    },[data , averages])
+         };
+    },[data , averages, loadingStatus])
 
     
 
