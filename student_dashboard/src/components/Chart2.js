@@ -1,21 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Chart.css'
 import { scaleBand , scaleLinear , ticks } from 'd3'; 
 import { useSelector } from 'react-redux';
-import { selectData } from "../features/studentData/studentDataSlice";
+import { selectAverageArray, selectData, selectAssignmentsIsChecked, selectLoadingStatus } from "../features/studentData/studentDataSlice";
 
 
 
 const Chart2 = ({ student }) => {
     const data = useSelector(selectData);
-    let filteredData = [];
-    if( typeof student!=="undefined"){
-        filteredData = data.filter(d => d.student===student);
-    }
-    else {
-        filteredData = data.slice(0,20);
-        //hier kunnen de methodes voor de home page komen
-    };
+    const averages = useSelector(selectAverageArray);
+    const [filteredData, setFilteredData] = useState(averages);
+
+    let loadingStatus = "idle"
+    
+    let selectedAssignments = useSelector(selectAssignmentsIsChecked);// dit is een object met booleans for iedere assignment
+    loadingStatus = useSelector(selectLoadingStatus);
+
+    useEffect(() => {
+        if( typeof student!=="undefined"){
+            console.log("Student is defined?")
+            //setFilteredData(data.filter(d => d.student===student));
+        }
+        else if(loadingStatus==="ready"){
+            
+            //         let newfilteredData = filteredData.filter(datapoint => {
+            //             return filterValues[datapoint.assignment]!==true
+            //         });
+        
+             console.log(filteredData)
+             setFilteredData(averages);
+
+            //hier kunnen de methodes voor de home page komen
+         };
+    },[data , averages, loadingStatus])
+
+    
 
     
     const width = 1200;
@@ -51,7 +70,7 @@ const Chart2 = ({ student }) => {
                 ))};
                 <g transform={`translate(${-innerHeight  + margin.left }, -15)`}>
                     {xScale.domain().map(tickValue => (
-                        <g key={`${tickValue}x`} transform={`translate(${xScale(tickValue) + innerWidth/(filteredData.length*2)},0) `}>
+                        <g key={`${tickValue}x`} transform={`translate(${xScale(tickValue) + innerWidth/(filteredData.length*2) -10},0) `}>
                             <text transform={`rotate(315)`} style={{textAnchor:"end"}} x={-margin.left } y={innerHeight*Math.sqrt(2)}>{tickValue}</text>
                         </g>
                 ))};

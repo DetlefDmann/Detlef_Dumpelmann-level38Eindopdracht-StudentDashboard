@@ -5,7 +5,6 @@ import { selectStudents } from '../features/studentData/studentDataSlice'
 
 const NavBar = () => {
     const studentNames = useSelector(selectStudents);
-    console.log("Studenten navbar" + studentNames)
     const linksJSX = studentNames.map(studentName => {
         return (
         <li key={`${studentName}linkitem`}>
