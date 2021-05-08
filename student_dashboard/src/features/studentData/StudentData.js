@@ -7,6 +7,7 @@ const StudentData = ({student}) => {
 
     return (
         <main>
+            <h1>Dit is de pagina van {student}</h1>
             <Chart student={student}/>
         </main>
     )

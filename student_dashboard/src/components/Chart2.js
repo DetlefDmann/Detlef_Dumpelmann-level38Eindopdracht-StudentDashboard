@@ -84,7 +84,9 @@ const Chart2 = ({ student }) => {
                             width={(innerWidth/(filteredData.length*2.5))} 
                             height={d.funFactor*scaleToValues} 
                             className="funFactor"
-                        />
+                        >
+                            <title>{d.assignment} Fun factor: {(Math.round(d.funFactor*100))/100}</title>
+                        </rect>
                         <rect 
                             key={i+filteredData.length} 
                             x={xScale(d.assignment) + innerWidth/(filteredData.length*2)} 
@@ -92,7 +94,10 @@ const Chart2 = ({ student }) => {
                             width={(innerWidth/(filteredData.length*2.5))} 
                             height={d.difficulty*scaleToValues} 
                             className="difficulty"
-                        ></rect>
+                            ><title>
+                                {d.assignment} <br /> Moeilijkheid: {(Math.round(d.difficulty*100))/100}
+                            </title>
+                        </rect>
                     </g>))
                 }
             </g>
