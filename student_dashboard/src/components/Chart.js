@@ -20,7 +20,7 @@ const Chart = ({ student }) => {
     
     const width = 1200;
     const height = 500;
-    const margin = { top:20 , right:20 , bottom:120 , left: 40};
+    const margin = { top:20 , right:20 , bottom:140 , left: 40};
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -40,7 +40,7 @@ const Chart = ({ student }) => {
     return (
         <svg width={width} height={height} className="chartcontainer">
             <g transform={`translate(${margin.left},${margin.top})`}>
-                {yScale.ticks().map(tickValue => (
+                {yScale.ticks(5).map(tickValue => (
                     <g key={`${tickValue}y`} transform={`translate(0, ${yScale(tickValue)})`}>
                         <line  x2={innerWidth} stroke="grey" />
                         <text style={{textAnchor:"end"}} dy=".5em" x="-.5em">{tickValue}</text>
@@ -61,9 +61,10 @@ const Chart = ({ student }) => {
                             y={ innerHeight-d.funFactor*scaleToValues} 
                             width={(innerWidth/(filteredData.length*2.5))} 
                             height={d.funFactor*scaleToValues} 
-                            className="funFactor" 
-                            title={d.funFactor}
-                        />
+                            className="funFactor"
+                        >
+                            <title>{d.assignment} Fun factor: {(Math.round(d.funFactor*100))/100}</title>
+                        </rect>
                         <rect 
                             key={i+filteredData.length} 
                             x={xScale(d.assignment) + innerWidth/(filteredData.length*2)} 
@@ -71,7 +72,10 @@ const Chart = ({ student }) => {
                             width={(innerWidth/(filteredData.length*2.5))} 
                             height={d.difficulty*scaleToValues} 
                             className="difficulty"
-                        />
+                            title={d.difficulty}
+                        >
+                            <title>{d.assignment} <br /> Moeilijkheid: {(Math.round(d.difficulty*100))/100}</title>
+                        </rect>
                     </g>))
                 }
             </g>
