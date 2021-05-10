@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Chart.css'
-import { scaleBand , scaleLinear , ticks } from 'd3'; 
+import { scaleBand , scaleLinear , line } from 'd3'; 
 import { useSelector } from 'react-redux';
 import { selectAverageArray, selectData, selectAssignmentsIsChecked, selectLoadingStatus } from "../features/studentData/studentDataSlice";
 
@@ -62,7 +62,7 @@ const Chart2 = ({ student }) => {
     return (
         <svg width={width} height={height} className="chartcontainer">
             <g transform={`translate(${margin.left},${margin.top})`}>
-                {yScale.ticks(5).map(tickValue => (
+                {yScale.ticks(10).map(tickValue => (
                     <g key={`${tickValue}y`} transform={`translate(0, ${yScale(tickValue)})`}>
                         <line  x2={innerWidth} stroke="grey" />
                         <text style={{textAnchor:"end"}} dy=".5em" x="-.5em">{tickValue}</text>
@@ -94,10 +94,31 @@ const Chart2 = ({ student }) => {
                             width={(innerWidth/(filteredData.length*2.5))} 
                             height={d.difficulty*scaleToValues} 
                             className="difficulty"
-                            ><title>
-                                {d.assignment} <br /> Moeilijkheid: {(Math.round(d.difficulty*100))/100}
+                            > <title>
+                                <title>
+                                    {d.assignment} <br />
+                                </title>
+                                <title>
+                                    Moeilijkheid: {(Math.round(d.difficulty*100))/100}
+                                </title>
                             </title>
                         </rect>
+                        <path className="difficulty--line"
+                            fill="none"
+                            stroke="black"
+                            strokeWidth="2"
+                            d={line()
+                                .x((d,i) => (i*innerWidth/filteredData.length)+(xOffset*i*2+innerWidth)/(filteredData.length*2))
+                                .y((d => innerHeight -d.difficulty*scaleToValues))(filteredData)}
+                        />
+                        <path className="funFactor--line"
+                            fill="none"
+                            stroke="red"
+                            strokeWidth="1"
+                            d={line()
+                                .x((d,i) => (i*innerWidth/filteredData.length)+(xOffset*i*2+innerWidth)/(filteredData.length*2))
+                                .y((d => innerHeight -d.funFactor*scaleToValues))(filteredData)}
+                        />
                     </g>))
                 }
             </g>
