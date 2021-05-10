@@ -40,7 +40,7 @@ const Chart = ({ student }) => {
     return (
         <svg width={width} height={height} className="chartcontainer">
             <g transform={`translate(${margin.left},${margin.top})`}>
-                {yScale.ticks().map(tickValue => (
+                {yScale.ticks(5).map(tickValue => (
                     <g key={`${tickValue}y`} transform={`translate(0, ${yScale(tickValue)})`}>
                         <line  x2={innerWidth} stroke="grey" />
                         <text style={{textAnchor:"end"}} dy=".5em" x="-.5em">{tickValue}</text>

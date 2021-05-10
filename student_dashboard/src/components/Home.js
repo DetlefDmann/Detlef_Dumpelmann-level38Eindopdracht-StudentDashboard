@@ -3,6 +3,7 @@ import { useSelector , useDispatch } from 'react-redux'
 import { selectAssignments, selectData, selectStudents, selectLoadingStatus} from '../features/studentData/studentDataSlice'
 import Chart2 from './Chart2'
 import FilterSelector from './FilterSelector'
+import LineChart from './LineChart'
 
 
 const Home = ({student}) => {

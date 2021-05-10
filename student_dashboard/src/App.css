@@ -1,5 +1,16 @@
+:root {
+  --primarydarkcolor: #114b5f;
+  --primarylightcolor: #c6dabf;
+  --secundarydarkcolor: #1a936f;
+  --secundarylightcolor: #88d498;
+  --tertiarylightcolor: #f3e9d2;
+}
+
 .App {
   text-align: center;
+  display: grid;
+  grid-template-columns: 100vw;
+  grid-template-rows: 1fr 1fr 10fr 1fr;
 }
 
 .nav__list {
@@ -7,4 +18,27 @@
   flex-direction: row;
   justify-content: space-around;
   list-style-type: none;
+}
+
+header {
+  background-color: var(--secundarydarkcolor);
+  color: var(--tertiarylightcolor);
+}
+
+nav , a {
+  background-color: var(--primarydarkcolor);
+  color: var(--primarylightcolor);
+}
+
+main {
+  background-color: var(--secundarylightcolor);
+}
+
+footer {
+  background-color: var(--secundarydarkcolor);
+  color: var(--tertiarylightcolor);
+}
+
+svg.chartcontainer {
+  transform: scale(0.5,0.5);
 }
