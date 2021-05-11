@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Chart.css'
-import { line, scaleBand , scaleLinear , ticks } from 'd3'; 
+import { line, scaleBand , scaleLinear } from 'd3'; 
 import { useSelector } from 'react-redux';
 import { selectAverageArray, selectData, selectAssignmentsIsChecked, selectLoadingStatus } from "../features/studentData/studentDataSlice";
 
@@ -10,7 +10,7 @@ const LineChart = () => {
     const averages = useSelector(selectAverageArray);
     const [filteredData, setFilteredData] = useState(averages);
     
-    let selectedAssignments = useSelector(selectAssignmentsIsChecked);// dit is een object met booleans for iedere assignment
+    //let selectedAssignments = useSelector(selectAssignmentsIsChecked);// dit is een object met booleans for iedere assignment
     let loadingStatus = useSelector(selectLoadingStatus);
   
     const width = 1200;
@@ -73,7 +73,7 @@ const LineChart = () => {
                     stroke="black"
                     strokeWidth="2"
                     d={line()
-                          .x(((d,i) => i*innerWidth/filteredData.length))
+                          .x((d,i) => (i*innerWidth/filteredData.length)+(xOffset*i*2+innerWidth)/(filteredData.length*2))
                           .y((d => innerHeight -d.difficulty*scaleToValues))(filteredData)}
                 />
                 <path className="funfactor--line"
@@ -81,8 +81,8 @@ const LineChart = () => {
                     stroke="red"
                     strokeWidth="2"
                     d={line()
-                          .x(((d,i) => i*innerWidth/filteredData.length))
-                          .y((d => innerHeight -d.funFactor*scaleToValues))(filteredData)}
+                        .x((d,i) => (i*innerWidth/filteredData.length)+(xOffset*i*2+innerWidth)/(filteredData.length*2))
+                        .y((d => innerHeight -d.funFactor*scaleToValues))(filteredData)}
                 />
             </g>
         </svg>
