@@ -6,39 +6,141 @@
   --tertiarylightcolor: #f3e9d2;
 }
 
+body {
+  width:100vw
+}
+
 .App {
   text-align: center;
   display: grid;
   grid-template-columns: 100vw;
-  grid-template-rows: 1fr 1fr 10fr 1fr;
+  grid-template-rows: 1fr 1fr 3fr 1fr 5fr 1fr;
+  grid-template-areas: "header"
+                        "nav"
+                        "main"
+                        "aside"
+                        "bside"
+                        "footer";
 }
 
 .nav__list {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-around;
+  align-content: center;
+  padding: 0;
+  margin: auto;
   list-style-type: none;
 }
 
+li {
+  margin-top: 20px;
+}
+
+.xTicks {
+  transform: translate(-40px,-25px);
+}
+
+.selectors--students {
+  width: auto;
+  grid-area: aside;
+  background-color: var(--secundarydarkcolor);
+}
+
+.selectors--assignments {
+  
+  grid-area: bside;
+  background-color: var(--secundarydarkcolor);
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
 header {
+  grid-area: header;
   background-color: var(--secundarydarkcolor);
   color: var(--tertiarylightcolor);
 }
 
-nav , a {
+nav {
+  grid-area: nav;
   background-color: var(--primarydarkcolor);
-  color: var(--primarylightcolor);
+  
 }
 
 main {
+  grid-area: main;
   background-color: var(--secundarylightcolor);
 }
 
 footer {
-  background-color: var(--secundarydarkcolor);
+  grid-area: footer;
+  background-color: var(--primarydarkcolor);
   color: var(--tertiarylightcolor);
 }
 
+a {
+  color: var(--primarylightcolor);
+}
+
 svg.chartcontainer {
-  transform: scale(0.5,0.5);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.chart {
+  margin: auto;
+}
+
+@media  screen and (min-width: 768px) {
+  .App {
+    display: grid;
+    grid-template-columns: 15vw 70vw 15vw;
+    grid-template-rows: 1fr 1fr 15fr 1fr;
+    grid-template-areas: "header header header"
+                          "nav nav nav"
+                          "aside main bside"
+                          "footer footer footer";
+  }
+
+  svg.chartcontainer {
+    width: 360px;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin: 0;
+    left: 0;
+    transform: scale(1.5,2) translate(0px, 50px);
+  }
+
+  .xTicks {
+    transform: translate(-40px,-25px);
+  }
+
+}
+@media  screen and (min-width: 1024px) {
+  .App {
+    display: grid;
+    grid-template-columns: 15vw 70vw 15vw;
+    grid-template-rows: 1fr 1fr 15fr 1fr;
+    grid-template-areas: "header header header"
+                          "nav nav nav"
+                          "aside main bside"
+                          "footer footer footer";
+  }
+
+  svg.chartcontainer {
+    width: 360px;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin: 0;
+    left: 0;
+    transform: scale(1.9,2) translate(0px, 50px);
+  }
+
+  .xTicks {
+    transform: translate(-40px,-25px);
+  }
+
+
 }

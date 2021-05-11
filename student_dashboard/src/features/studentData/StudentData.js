@@ -1,5 +1,5 @@
 import React from "react";
-import Chart from "../../components/Chart";
+import Chart2 from "../../components/Chart2";
 
 const StudentData = ({student}) => {
     // Hier willen we wat informatie over de student neer zetten,
@@ -8,7 +8,7 @@ const StudentData = ({student}) => {
     return (
         <main>
             <h1>Dit is de pagina van {student}</h1>
-            <Chart student={student}/>
+            <Chart2 student={student}/>
         </main>
     )
 }

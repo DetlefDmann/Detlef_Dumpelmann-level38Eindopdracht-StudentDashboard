@@ -1,8 +1,8 @@
 text {
-    font-size: x-small;
+    font-size: 0.2rem;
 }
 
-.funFactor {
+.funFactor--bar {
     fill: rgb(215, 255, 39);
     stroke: rgba(162, 173, 7, 0.8);
 }
@@ -11,7 +11,7 @@ text {
     stroke: rgba(162, 173, 7, 0.8);
 }
 
-.difficulty {
+.difficulty--bar {
     fill:rgb(248, 171, 5);
     stroke:rgb(226, 101, 43);
 }

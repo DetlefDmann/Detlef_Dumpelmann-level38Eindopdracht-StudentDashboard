@@ -19,7 +19,7 @@ const Chart2 = ({ student }) => {
     useEffect(() => {
         if( typeof student!=="undefined"){
             console.log("Student is defined?")
-            //setFilteredData(data.filter(d => d.student===student));
+            setFilteredData(data.filter(d => d.student===student));
         }
         else if(loadingStatus==="ready"){
             
@@ -37,9 +37,9 @@ const Chart2 = ({ student }) => {
     
 
     
-    const width = 1200;
-    const height = 500;
-    const margin = { top:20 , right:20 , bottom:140 , left: 40};
+    const width = 300;
+    const height = 125;
+    const margin = { top:5 , right:1 , bottom:40, left: 40};
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -60,15 +60,16 @@ const Chart2 = ({ student }) => {
     const xOffset = width/filteredData.length*2 - innerWidth/filteredData.length*2        
 
     return (
-        <svg width={width} height={height} className="chartcontainer">
-            <g transform={`translate(${margin.left},${margin.top})`}>
+        <div >
+        <svg width={width} height={height} className="chartcontainer" >
+            <g transform={`translate(${margin.left},${margin.top})`} className="chart">
                 {yScale.ticks(10).map(tickValue => (
                     <g key={`${tickValue}y`} transform={`translate(0, ${yScale(tickValue)})`}>
-                        <line  x2={innerWidth} stroke="grey" />
+                        <line  x2={innerWidth} stroke="grey" strokeWidth="0.5"/>
                         <text style={{textAnchor:"end"}} dy=".5em" x="-.5em">{tickValue}</text>
                     </g>
                 ))};
-                <g transform={`translate(${-innerHeight  + margin.left }, -15)`}>
+                <g  className="xTicks">
                     {xScale.domain().map(tickValue => (
                         <g key={`${tickValue}x`} transform={`translate(${xScale(tickValue) + innerWidth/(filteredData.length*2) -10},0) `}>
                             <text transform={`rotate(315)`} style={{textAnchor:"end"}} x={-margin.left } y={innerHeight*Math.sqrt(2)}>{tickValue}</text>
@@ -79,11 +80,12 @@ const Chart2 = ({ student }) => {
                     <g key={`${i}rect`}>
                         <rect 
                             key={i} 
-                            x={xScale(d.assignment) + xOffset} 
+                            x={xScale(d.assignment) + xOffset/4} 
                             y={innerHeight - d.funFactor*scaleToValues} 
                             width={(innerWidth/(filteredData.length*2.5))} 
                             height={d.funFactor*scaleToValues} 
-                            className="funFactor"
+                            className="funFactor--bar"
+                            strokeWidth="0.25"
                         >
                             <title>{d.assignment} Fun factor: {(Math.round(d.funFactor*100))/100}</title>
                         </rect>
@@ -93,7 +95,8 @@ const Chart2 = ({ student }) => {
                             y={ innerHeight-d.difficulty*scaleToValues} 
                             width={(innerWidth/(filteredData.length*2.5))} 
                             height={d.difficulty*scaleToValues} 
-                            className="difficulty"
+                            className="difficulty--bar"
+                            strokeWidth="0.25"
                             > <title>
                                 <title>
                                     {d.assignment} <br />
@@ -106,23 +109,24 @@ const Chart2 = ({ student }) => {
                         <path className="difficulty--line"
                             fill="none"
                             stroke="black"
-                            strokeWidth="2"
+                            strokeWidth="0.5"
                             d={line()
-                                .x((d,i) => (i*innerWidth/filteredData.length)+(xOffset*i*2+innerWidth)/(filteredData.length*2))
+                                .x((d,i) => (i*innerWidth/filteredData.length)+(xOffset*i+innerWidth)/(filteredData.length*2))
                                 .y((d => innerHeight -d.difficulty*scaleToValues))(filteredData)}
                         />
                         <path className="funFactor--line"
                             fill="none"
                             stroke="red"
-                            strokeWidth="1"
+                            strokeWidth="0.5"
                             d={line()
-                                .x((d,i) => (i*innerWidth/filteredData.length)+(xOffset*i*2+innerWidth)/(filteredData.length*2))
+                                .x((d,i) => (i*innerWidth/filteredData.length)+(xOffset*i+innerWidth)/(filteredData.length*2))
                                 .y((d => innerHeight -d.funFactor*scaleToValues))(filteredData)}
                         />
                     </g>))
                 }
             </g>
         </svg>
+        </div>
     )
 }
 
