@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
-import { useSelector , useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { selectAssignments, selectData, selectStudents, selectLoadingStatus} from '../features/studentData/studentDataSlice'
 import Chart2 from './Chart2'
 import AssignmentFilterSelector from './AssignmentFilterSelector'
 import StudentFilterSelector from './StudentFilterSelector'
+import GraphSelectors from './GraphSelectors'
 
 
 const Home = ({student}) => {
@@ -28,6 +29,7 @@ const Home = ({student}) => {
             <main>
                 <h1>Dit is het overzicht.</h1>
                 <Chart2 student={student} />
+                <GraphSelectors />
             </main>
         </>
     )
