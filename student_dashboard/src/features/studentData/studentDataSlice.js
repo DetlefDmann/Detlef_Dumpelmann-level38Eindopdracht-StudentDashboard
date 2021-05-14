@@ -14,7 +14,12 @@ const initialState = {
     averages:[],
     assignmentsIsChecked:{"Hallo":true},
     studentsIsChecked:{"Sarah Connor":true},
-    arraysPerStudent:{"Sarah Connor":[]}
+    arraysPerStudent:{"Sarah Connor":[]},
+    graphOptions:{
+                    show:"both",
+                    graphType:"lineAndBar",
+                    sort:"normal"
+    }
 }
 
 //met deze thunk kan de data opgehaald worden 
@@ -59,6 +64,9 @@ export const studentDataSlice = createSlice({
         },
         setArraysPerStudent: (state , action ) => {
             state.arraysPerStudent = action.payload;
+        },
+        setGraphOptions: (state , action ) => {
+            state.graphOptions = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -73,7 +81,7 @@ export const studentDataSlice = createSlice({
     },
 });
 
-export const { loadData , setStudentNames , setAssignments , setAverageArray , setAssignmentsIsChecked , setStudentsIsChecked , setArraysPerStudent} = studentDataSlice.actions;
+export const { loadData , setStudentNames , setAssignments , setAverageArray , setAssignmentsIsChecked , setStudentsIsChecked , setArraysPerStudent , setGraphOptions } = studentDataSlice.actions;
 
 // om de data beschikbaar te maken gebruik je de volgende functie (die een selector wordt genoemd) ,
 //waarmee je een waarde uit de state kunt selecteren.
@@ -85,5 +93,6 @@ export const selectLoadingStatus = (state) => state.studentData.status;
 export const selectAssignmentsIsChecked = (state) => state.studentData.assignmentsIsChecked;
 export const selectStudentsIsChecked = (state) => state.studentData.studentsIsChecked;
 export const selectArrayPerStudent = (state) => state.studentData.arraysPerStudent;
+export const selectGraphOptions = (state) => state.studentData.graphOptions;
 
 export default studentDataSlice.reducer;
