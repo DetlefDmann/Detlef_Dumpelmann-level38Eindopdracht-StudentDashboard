@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Chart.css'
 import { scaleBand , scaleLinear , line } from 'd3'; 
 import { useSelector } from 'react-redux';
-import { selectAverageArray, selectData, selectAssignmentsIsChecked, selectLoadingStatus ,selectGraphOptions, selectSpecific } from "../features/studentData/studentDataSlice";
+import { selectData, selectLoadingStatus ,selectGraphOptions, selectSpecific } from "../features/studentData/studentDataSlice";
 import { filterArrayByKey } from '../utils';
 
 
@@ -10,18 +10,17 @@ import { filterArrayByKey } from '../utils';
 const Chart = ({ student }) => {
     const data = useSelector(selectData);
     const specific = useSelector(selectSpecific);
-    const averages = useSelector(selectAverageArray);
     const graphOptions = useSelector(selectGraphOptions);
-    const specificData = filterArrayByKey(data , "assignment" , specific.select)// DATA van de geselecteerde opdracht
-    const [filteredData, setFilteredData] = useState(specificData);// moet nu rating van 1 opdracht van iedere student zijn ? !!!!!!!!!!!!!!!!!!!!!!
+    const init = filterArrayByKey(data , "assignment" , specific.select)
+    const [filteredData, setFilteredData] = useState(init);
 
     let loadingStatus = "idle"
     
-    let selectedAssignments = useSelector(selectAssignmentsIsChecked);// dit is een object met booleans for iedere assignment
     loadingStatus = useSelector(selectLoadingStatus);
 
     useEffect(() => {
-        if(loadingStatus==="ready"){////////// hier een versie maken voor het per opdracht bekijken van de cijfers die studenten hebben gegeven
+        if(loadingStatus==="ready"){
+            const specificData = filterArrayByKey(data , "assignment" , specific.select)// DATA van de geselecteerde opdracht
             let sortedAverages = [...specificData]
              console.log(graphOptions.sort)
              if (graphOptions.sort==="normal"){
@@ -69,7 +68,7 @@ const Chart = ({ student }) => {
     const YAxis = () => { 
         return yScale.ticks(10).map(tickValue => (
                 <g key={`${tickValue}y`} transform={`translate(0, ${yScale(tickValue)})`}>
-                    <line  x2={innerWidth} stroke="grey" strokeWidth="0.5"/>
+                    <line  x2={innerWidth} stroke="lightgrey" strokeWidth="0.2"/>
                     <text style={{textAnchor:"end"}} dy=".5em" x="-.5em">{tickValue}</text>
                 </g>)
                 );
@@ -80,7 +79,7 @@ const Chart = ({ student }) => {
     return <g className="xTicks">
             {xScale.domain().map(tickValue => (
                 <g key={`${tickValue}x`} transform={`translate(${xScale(tickValue) + innerWidth/(filteredData.length*2) -10},0) `}>
-                    <text transform={`rotate(315)`} style={{textAnchor:"end"}} x={-margin.left } y={innerHeight*Math.sqrt(2)}>{tickValue}</text>
+                    <text className="bigText" transform={`rotate(315)`} style={{textAnchor:"end"}} x={-margin.left } y={innerHeight*Math.sqrt(2)}>{tickValue}</text>
                 </g>)
             )}
         </g>;
@@ -99,7 +98,7 @@ const Chart = ({ student }) => {
                     className="funFactor--bar"
                     strokeWidth="0.25"
                 >
-                    <title>{d.student} Fun factor: {(Math.round(d.funFactor*100))/100}</title>
+                    <title>{d.assignment} Fun factor: {(Math.round(d.funFactor*100))/100}</title>
                 </rect>));
         }
         else return null;
@@ -118,12 +117,7 @@ const Chart = ({ student }) => {
                     className="difficulty--bar"
                     strokeWidth="0.25"
                     > <title>
-                        <title>
-                            {d.student} <br></br>
-                        </title>
-                        <title>
-                            Moeilijkheid: {(Math.round(d.difficulty*100))/100}
-                        </title>
+                            {d.assignment} Moeilijkheid: {(Math.round(d.difficulty*100))/100}
                     </title>
                 </rect>));
         }
@@ -136,7 +130,7 @@ const Chart = ({ student }) => {
         return (<path className="funFactor--line"
                             fill="none"
                             stroke="red"
-                            strokeWidth="0.5"
+                            strokeWidth="0.75"
                             d={line()
                                 .x((d,i) => (i*innerWidth/filteredData.length)+(xOffset*i+innerWidth)/(filteredData.length*2))
                                 .y((d => innerHeight -d.funFactor*scaleToValues))(filteredData)}
@@ -150,7 +144,7 @@ const Chart = ({ student }) => {
         return <path className="difficulty--line"
                             fill="none"
                             stroke="black"
-                            strokeWidth="0.5"
+                            strokeWidth="0.75"
                             d={line()
                                 .x((d,i) => (i*innerWidth/filteredData.length)+(xOffset*i+innerWidth)/(filteredData.length*2))
                                 .y((d => innerHeight -d.difficulty*scaleToValues))(filteredData)}
@@ -170,7 +164,7 @@ const Chart = ({ student }) => {
                 <DiffBarJSX />
                 <FunLineJSX />
                 <DiffLineJSX />
-                <text></text>
+                <text className="bigText" x={innerWidth/2} y={height- margin.bottom/2 } >Opdracht :{filteredData[0].assignment}</text>
             </g>
         </svg>
         </div>

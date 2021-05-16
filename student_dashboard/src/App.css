@@ -50,13 +50,23 @@ li {
   background-color: var(--secundarydarkcolor);
 }
 
+.student__profile {
+  width: auto;
+  grid-area: aside;
+  background-color: var(--secundarydarkcolor);
+}
+
 .selectors--assignments {
-  
   grid-area: bside;
   background-color: var(--secundarydarkcolor);
   display:flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+}
+
+.student__stats {
+  grid-area: bside;
+  background-color: var(--secundarydarkcolor);
 }
 
 header {
@@ -160,7 +170,7 @@ svg.chartcontainer {
   .App {
     display: grid;
     grid-template-columns: 15vw 70vw 15vw;
-    grid-template-rows: 1fr 1fr 15fr 1fr;
+    grid-template-rows: 1fr 1fr 10fr 1fr;
     grid-template-areas: "header header header"
                           "nav nav nav"
                           "aside main bside"

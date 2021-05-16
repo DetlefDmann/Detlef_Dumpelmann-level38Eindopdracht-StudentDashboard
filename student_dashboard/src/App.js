@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     //deze data hoeft maar een keer opgehaald te worden
     dispatch(getDataFromGist());
-  },[]);
+  },[dispatch]);
   
   useEffect(() => {
     if(loadingStatus==="ready"){
@@ -57,7 +57,7 @@ function App() {
     dispatch(setAverageArray(totalAverages));
     dispatch(setAssignments(assignmentNamesArray));
     }
-  }, [data, loadingStatus]);
+  }, [data, loadingStatus, dispatch]);
 
   useEffect(()=>{
     // Hier filteren welke data uitgerekend moet worden
@@ -98,7 +98,7 @@ function App() {
 
     // ook een functie maken VOOR 1 OPDRACHT de scores van iedere student laten zien
                               
-  },[assignmentChecked, studentChecked])
+  },[assignmentChecked, studentChecked, dispatch, loadingStatus, assignmentsPerStudent])
  
   const studentNames = useSelector(selectStudents)
 
