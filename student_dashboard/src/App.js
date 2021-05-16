@@ -76,7 +76,7 @@ function App() {
     }
 
     //dan filteren op assignment
-    console.log("Dit is filteredByStudent na de for loop : " + filteredByStudent)
+    //console.log("Dit is filteredByStudent na de for loop : " + filteredByStudent)
 
         //maak een array met de assignments die aangevinkt zijn
         let filteredAssignmentsArray = [];
@@ -90,11 +90,13 @@ function App() {
          // voor deze assignments gaan we het gemiddelde berekenen en opslaan in Redux     
         if (loadingStatus==="ready"&&filteredByStudent.length>1) {
            const totalAverages = filteredAssignmentsArray.map(assignment =>{
-                return calculateAverage(filterArrayByKey(filteredByStudent, "assignment", assignment))
+                return calculateAverage(filterArrayByKey(filteredByStudent, "assignment", assignment))//voor iedere assignment wordt het gemiddelde uitgerekend uit het total array
                 });
               
               dispatch(setAverageArray(totalAverages));
         }
+
+    // ook een functie maken VOOR 1 OPDRACHT de scores van iedere student laten zien
                               
   },[assignmentChecked, studentChecked])
  

@@ -20,16 +20,37 @@ const Chart2 = ({ student }) => {
     useEffect(() => {
         if( typeof student!=="undefined"){
             console.log("Student is defined?")
-            setFilteredData(data.filter(d => d.student===student));
+            let sortedAverages = data.filter(d => d.student===student)
+            if (graphOptions.sort==="normal"){
+                setFilteredData(data.filter(d => d.student===student));
+             }
+             else if (graphOptions.sort==="mostfun") {
+                sortedAverages = sortedAverages.sort((a,b) => b.funFactor -a.funFactor);
+                setFilteredData(sortedAverages);
+             }
+             else {
+                 sortedAverages = sortedAverages.sort((a,b) => b.difficulty -a.difficulty);
+                 setFilteredData(sortedAverages);
+            }
         }
         else if(loadingStatus==="ready"){
-            
+            let sortedAverages = [...averages]
              console.log(graphOptions)
-             setFilteredData(averages);
+             if (graphOptions.sort==="normal"){
+                setFilteredData(averages);
+             }
+             else if (graphOptions.sort==="mostfun") {
+                sortedAverages = sortedAverages.sort((a,b) => b.funFactor -a.funFactor);
+                setFilteredData(sortedAverages);
+             }
+             else {
+                 sortedAverages = sortedAverages.sort((a,b) => b.difficulty -a.difficulty);
+                 setFilteredData(sortedAverages);
+            }
 
             //hier kunnen de methodes voor de home page komen
          };
-    },[data , averages, loadingStatus])
+    },[data , averages, loadingStatus, graphOptions])
 
     
 
