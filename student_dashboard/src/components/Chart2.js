@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Chart.css'
 import { scaleBand , scaleLinear , line } from 'd3'; 
 import { useSelector } from 'react-redux';
-import { selectAverageArray, selectData, selectAssignmentsIsChecked, selectLoadingStatus ,selectGraphOptions } from "../features/studentData/studentDataSlice";
+import { selectAverageArray, selectData,  selectLoadingStatus ,selectGraphOptions } from "../features/studentData/studentDataSlice";
 
 
 
@@ -14,7 +14,6 @@ const Chart2 = ({ student }) => {
 
     let loadingStatus = "idle"
     
-    let selectedAssignments = useSelector(selectAssignmentsIsChecked);// dit is een object met booleans for iedere assignment
     loadingStatus = useSelector(selectLoadingStatus);
 
     useEffect(() => {
@@ -50,7 +49,7 @@ const Chart2 = ({ student }) => {
 
             //hier kunnen de methodes voor de home page komen
          };
-    },[data , averages, loadingStatus, graphOptions])
+    },[data , averages, loadingStatus, graphOptions, student])
 
     
 
@@ -81,7 +80,7 @@ const Chart2 = ({ student }) => {
     const YAxis = () => { 
         return yScale.ticks(10).map(tickValue => (
                 <g key={`${tickValue}y`} transform={`translate(0, ${yScale(tickValue)})`}>
-                    <line  x2={innerWidth} stroke="grey" strokeWidth="0.5"/>
+                    <line  x2={innerWidth} stroke="lightgrey" strokeWidth="0.25"/>
                     <text style={{textAnchor:"end"}} dy=".5em" x="-.5em">{tickValue}</text>
                 </g>)
                 );

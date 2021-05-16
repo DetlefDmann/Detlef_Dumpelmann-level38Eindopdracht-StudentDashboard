@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector , useDispatch} from 'react-redux'
 import { selectAssignments, selectSpecific , setSpecific} from '../features/studentData/studentDataSlice'
 import { v4 as uuid } from 'uuid';
@@ -8,13 +8,9 @@ const AssignmentRadioSelector = () => {
 const dispatch = useDispatch();
 const assignments = useSelector(selectAssignments);
 const selected = useSelector(selectSpecific);
-const [selectedSpecific, setSelectedSpecific] = useState({"select":assignments[0]})
 
 const assignmentInputHandler = (e) => {
     const {name, value} = e.target
-    setSelectedSpecific({
-        [name]:value
-    });
     dispatch(setSpecific({[name]:value}))
 }
 
