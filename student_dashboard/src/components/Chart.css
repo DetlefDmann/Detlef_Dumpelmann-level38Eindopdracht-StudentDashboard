@@ -3,12 +3,12 @@ text {
 }
 
 .funFactor--bar {
-    fill: rgb(215, 255, 39);
+    fill: rgba(227, 241, 27, 0.8);
     stroke: rgba(162, 173, 7, 0.8);
 }
 
 .funFactor--line {
-    stroke: rgba(162, 173, 7, 0.8);
+    stroke: rgba(227, 241, 27, 0.8);
 }
 
 .difficulty--bar {
@@ -22,4 +22,8 @@ text {
 
 .chartcontainer {
     background-color: white;
+}
+
+.bigText {
+    font-size: 0.3rem;
 }
