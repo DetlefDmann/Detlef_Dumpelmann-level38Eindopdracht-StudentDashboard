@@ -41,7 +41,7 @@ const GraphSelectors = ({caller}) => {
             </select><br />
             {/* rating per opdracht (totaaloverzicht) of rating per student (van 1 opdracht) */}
             {optionalInputJSX}
-            {/* sorteren op */}
+            {/* waar op sorteren */}
             <label htmlFor="sort">gesorteerd </label>
             <select name="sort" id="sort" value={graphOptions.sort} onChange={inputHandler}>
                 <option value="normal"> { graphOptions.viewedData==="general"? "op opdracht" : "op student"}</option>
