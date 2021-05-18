@@ -1,7 +1,7 @@
 import React from "react";
 import Chart2 from "../../components/Chart2";
 import GraphSelectors from '../../components/GraphSelectors';
-import StudentStats from '../../components/StudentStats'
+import StudentStats from '../../components/StudentStats';
 import StudentProfile from "../../components/StudentProfile";
 
 const StudentData = ({student}) => {
