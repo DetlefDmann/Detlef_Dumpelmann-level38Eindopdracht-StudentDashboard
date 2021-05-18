@@ -195,7 +195,7 @@ svg.chartcontainer {
   .App {
     display: grid;
     grid-template-columns: 15vw 70vw 15vw;
-    grid-template-rows: 1fr 1fr 10fr 1fr;
+    grid-template-rows: 5em 4em auto 3em;
     grid-template-areas: "header header header"
                           "nav nav nav"
                           "aside main bside"

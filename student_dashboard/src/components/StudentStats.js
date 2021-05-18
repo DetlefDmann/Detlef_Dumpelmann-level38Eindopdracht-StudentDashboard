@@ -15,11 +15,9 @@ const StudentStats = ({student}) => {
     return (
         <section className="student__stats" >
             <h3>Statistische info</h3>
-            <p>De gemiddelde score voor moeilijkheid: 
-                {Math.round(averageValues.difficulty*100)/100} <br />
+            <p>De gemiddelde score voor moeilijkheid: {Math.round(averageValues.difficulty*100)/100} <br />
                 <hr />
-                De gemiddelde score voor leuk: 
-                {Math.round(averageValues.funFactor*100)/100} <br />
+                De gemiddelde score voor leuk: {Math.round(averageValues.funFactor*100)/100} <br />
                 <hr />
                 Deze opdracht was moeilijk, maar best leuk: {thisStudentArray[0].assignment}
                 <hr />
