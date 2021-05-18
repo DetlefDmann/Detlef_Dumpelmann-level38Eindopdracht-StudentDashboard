@@ -1,7 +1,7 @@
 import React from "react";
 import Chart2 from "../../components/Chart2";
 import GraphSelectors from '../../components/GraphSelectors';
-import StudentStats from '../../components/StudentStats'
+import StudentStats from '../../components/StudentStats';
 import StudentProfile from "../../components/StudentProfile";
 
 const StudentData = ({student}) => {
@@ -11,7 +11,7 @@ const StudentData = ({student}) => {
     return (
         <>
             <StudentProfile student={student} />
-            <StudentStats />
+            <StudentStats student={student}/>
             <main>
                 <h1>Dit is de pagina van {student}</h1>
                 <Chart2 student={student}/>
