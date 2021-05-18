@@ -16,7 +16,7 @@ body {
   text-align: center;
   display: grid;
   grid-template-columns: 100vw;
-  grid-template-rows: 5em 6em 20em minmax(min-content, 5fr) minmax(min-content,5fr) 4em;
+  grid-template-rows: 5em 6em 20em minmax(min-content, max-content) minmax(min-content,max-content) 4em;
   grid-template-areas: "header"
                         "nav"
                         "main"
@@ -72,6 +72,7 @@ li {
 .student__stats {
   grid-area: bside;
   background-color: var(--secundarydarkcolor);
+  padding: 15px;
 }
 
 .picture {

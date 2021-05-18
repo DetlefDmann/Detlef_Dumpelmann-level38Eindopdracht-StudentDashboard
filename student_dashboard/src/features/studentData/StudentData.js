@@ -11,7 +11,7 @@ const StudentData = ({student}) => {
     return (
         <>
             <StudentProfile student={student} />
-            <StudentStats />
+            <StudentStats student={student}/>
             <main>
                 <h1>Dit is de pagina van {student}</h1>
                 <Chart2 student={student}/>
