@@ -170,6 +170,35 @@ const Chart2 = ({ student }) => {
         else return null;
 }
 
+    //De legenda
+    const Legend = () => {
+        return (
+        <>
+            <g>
+            <rect
+                className="funFactor--legend"
+                x="-35"
+                y={innerHeight/2}
+                width="3"
+                height="3"
+                strokeWidth="0.25"
+            ></rect>
+            <text x="-30" y={innerHeight/2 + 3} >Fun Factor</text>
+            </g>
+            <g>
+            <rect
+                className="difficulty--legend"
+                x="-35"
+                y={(innerHeight/2)+ 10}
+                width="3"
+                height="3"
+                strokeWidth="0.25"
+            ></rect>
+            <text x="-30" y={(innerHeight/2) + 13}>Moeilijkheid</text>
+            </g>
+        </>)
+    }
+
 
     return (
         <div >
@@ -181,6 +210,7 @@ const Chart2 = ({ student }) => {
                 <DiffBarJSX />
                 <FunLineJSX />
                 <DiffLineJSX />
+                <Legend />
                 <text></text>
             </g>
         </svg>
