@@ -115,6 +115,13 @@ svg.chartcontainer {
   margin: auto;
 }
 
+table, th, td {
+  margin: auto;
+  border: 1px solid black;
+  border-collapse: collapse;
+  background-color: var(--tertiarylightcolor);
+}
+
 @media  screen and (min-width: 768px) {
   .App {
     min-height: 100vh;
