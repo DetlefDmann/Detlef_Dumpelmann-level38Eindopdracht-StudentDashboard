@@ -64,8 +64,7 @@ li {
 .selectors--assignments {
   grid-area: bside;
   background-color: var(--secundarydarkcolor);
-  display:flex;
-  flex-wrap: wrap;
+  
   justify-content: flex-start;
 }
 
@@ -117,6 +116,8 @@ svg.chartcontainer {
 
 table, th, td {
   margin: auto;
+  margin-top: 10px;
+  padding: 5px;
   border: 1px solid black;
   border-collapse: collapse;
   background-color: var(--tertiarylightcolor);
