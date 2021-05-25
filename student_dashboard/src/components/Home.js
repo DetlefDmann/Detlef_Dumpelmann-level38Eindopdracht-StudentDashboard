@@ -25,6 +25,9 @@ const Home = ({student}) => {
                 <h1>Dit is het overzicht.</h1>
                 {chartSelectionJSX}
                 <GraphSelectors caller="home"/>
+                <br /><hr />
+                <h3>Data in tabel vorm.</h3>
+                <p>De in de grafiek gebruikte data staat in de hier volgende tabel:</p>
                 <Table />
             </main>
         </>
