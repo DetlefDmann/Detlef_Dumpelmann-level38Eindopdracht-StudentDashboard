@@ -16,11 +16,11 @@ const StudentStats = ({student}) => {
         <section className="student__stats" >
             <h3>Statistische info</h3>
             <p>De gemiddelde score voor moeilijkheid: {Math.round(averageValues.difficulty*100)/100} <br />
-                <hr />
+                <br />
                 De gemiddelde score voor leuk: {Math.round(averageValues.funFactor*100)/100} <br />
-                <hr />
-                Deze opdracht was moeilijk, maar best leuk: {thisStudentArray[0].assignment}
-                <hr />
+                <br />
+                Deze opdracht was moeilijk, maar best leuk: {thisStudentArray[0].assignment} <br />
+                <br />
                 Deze opdracht was makkelijk, maar minder leuk: {thisStudentArray[thisStudentArray.length-1].assignment}
             </p>
         </section>
