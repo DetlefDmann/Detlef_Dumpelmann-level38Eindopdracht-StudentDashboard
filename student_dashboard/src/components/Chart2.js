@@ -18,7 +18,6 @@ const Chart2 = ({ student }) => {
 
     useEffect(() => {
         if( typeof student!=="undefined"){
-            console.log("Student is defined?")
             let sortedAverages = data.filter(d => d.student===student)
             if (graphOptions.sort==="normal"){
                 setFilteredData(data.filter(d => d.student===student));
@@ -33,8 +32,7 @@ const Chart2 = ({ student }) => {
             }
         }
         else if(loadingStatus==="ready"){
-            let sortedAverages = [...averages]
-             console.log(graphOptions)
+            let sortedAverages = [...averages];
              if (graphOptions.sort==="normal"){
                 setFilteredData(averages);
              }
