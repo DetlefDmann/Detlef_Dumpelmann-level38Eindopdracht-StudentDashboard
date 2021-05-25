@@ -38,7 +38,7 @@ const assignmentsInputJSX = assignments.map(assignment => {
 
     return (
         <section className="selectors--assignments">
-            <button>Selecteer opdrachten.</button><br />
+            <h3>Selecteer opdrachten.</h3><br />
             {assignmentsInputJSX}
         </section>
     )

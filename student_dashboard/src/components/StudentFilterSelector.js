@@ -32,7 +32,7 @@ const studentInputsJsx = students.map(student => {
 
 return (
     <section className="selectors--students">
-        <button>Selecteer studenten.</button>
+        <h3>Selecteer studenten.</h3>
         {studentInputsJsx}
     </section>
 )

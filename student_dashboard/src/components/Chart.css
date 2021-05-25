@@ -11,6 +11,11 @@ text {
     stroke: rgba(227, 241, 27, 0.8);
 }
 
+.funFactor--legend {
+    fill: rgba(227, 241, 27, 0.8);
+    stroke: rgba(162, 173, 7, 0.8);
+}
+
 .difficulty--bar {
     fill:rgb(248, 171, 5);
     stroke:rgb(226, 101, 43);
@@ -18,6 +23,11 @@ text {
 
 .difficulty--line {
     stroke: rgb(248, 171, 5);
+}
+
+.difficulty--legend {
+    fill:rgb(248, 171, 5);
+    stroke:rgb(226, 101, 43);
 }
 
 .chartcontainer {

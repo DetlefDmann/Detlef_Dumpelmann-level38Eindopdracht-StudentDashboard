@@ -67,10 +67,10 @@ function App() {
     for (const key in studentChecked) {
       if (studentChecked[key]) {
         filteredByStudent = filteredByStudent.concat(assignmentsPerStudent[key])
-        console.log("Dit wordt er toegevoegd: " + assignmentsPerStudent[key])
-        console.log(key)
-        console.log(studentChecked[key])
-        console.log(filteredByStudent)
+        
+        // console.log(key)
+        // console.log(studentChecked[key])
+        // console.log(filteredByStudent)
       }
       else console.log("Student checked key: " + studentChecked[key])
     }

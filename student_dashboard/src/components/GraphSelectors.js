@@ -6,11 +6,9 @@ import { selectGraphOptions , setGraphOptions } from '../features/studentData/st
 const GraphSelectors = ({caller}) => {
     const dispatch = useDispatch();
     const graphOptions = useSelector(selectGraphOptions);
-    console.log("graphOptions:" + graphOptions.show);
 
     const inputHandler = (event) => {
         const {name , value} = event.target;
-        console.log(name);
         dispatch(setGraphOptions({
             ...graphOptions, [name]:value
         }))
