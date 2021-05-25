@@ -19,21 +19,23 @@ console.log("Selected in redux:" + selected.select)
 //checkboxen voor de studenten
 const assignmentInputsJsx = assignments.map(assignment => {
     return (
-        <React.Fragment key={uuid()}>
-            <input 
-                type="radio" 
-                name="select" 
-                id={assignment} 
-                value={assignment}
-                checked={selected.select===assignment}
-                onChange={assignmentInputHandler}/>
-            <label htmlFor={assignment}>{assignment}</label>
-        </React.Fragment>)
+        <div key={uuid()}>
+            <label htmlFor={assignment}>
+                <input 
+                    type="radio" 
+                    name="select" 
+                    id={assignment} 
+                    value={assignment}
+                    checked={selected.select===assignment}
+                    onChange={assignmentInputHandler}/>
+                {assignment}
+            </label>
+        </div>)
 });
 
 return (
     <section className="selectors--assignments">
-        <button>Selecteer opdracht.</button>
+        <h3>Selecteer opdracht.</h3>
         {assignmentInputsJsx}
     </section>
 )
