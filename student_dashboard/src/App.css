@@ -16,7 +16,7 @@ body {
   text-align: center;
   display: grid;
   grid-template-columns: 100vw;
-  grid-template-rows: 5em 6em 20em minmax(min-content, max-content) minmax(min-content,max-content) 4em;
+  grid-template-rows: 5em 6em minmax(min-content, max-content) minmax(min-content, max-content) minmax(min-content,max-content) 4em;
   grid-template-areas: "header"
                         "nav"
                         "main"
@@ -48,6 +48,10 @@ li {
   width: auto;
   grid-area: aside;
   background-color: var(--secundarydarkcolor);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
 }
 
 .student__profile {
@@ -64,8 +68,18 @@ li {
 .selectors--assignments {
   grid-area: bside;
   background-color: var(--secundarydarkcolor);
-  
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: flex-start;
+  align-items: flex-start;
+}
+
+h3 {
+  margin: auto;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .student__stats {
@@ -159,6 +173,10 @@ table, th, td {
   .student__profile {
     font-size: x-small;
     padding: 0 10px;
+  }
+
+  .selectors--students {
+    padding-left: 1em;
   }
 
 }

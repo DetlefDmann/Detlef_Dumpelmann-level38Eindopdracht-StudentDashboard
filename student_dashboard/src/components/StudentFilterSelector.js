@@ -9,8 +9,7 @@ const studentIsChecked = useSelector(selectStudentsIsChecked);
 const dispatch = useDispatch();
 
 const studentInputHandler = (e) => {
-    const {name, checked} = e.target
-    console.log(checked + name);
+    const {name, checked} = e.target;
     dispatch(setStudentsIsChecked({
         ...studentIsChecked, [name]:checked
     }))
@@ -20,13 +19,15 @@ const studentInputHandler = (e) => {
 const studentInputsJsx = students.map(student => {
     return (
         <React.Fragment key={uuid()}>
-            <input 
-                type="checkbox" 
-                name={student} 
-                id={student} 
-                checked={studentIsChecked[student]} 
-                onChange={studentInputHandler}/>
-            <label htmlFor={student}>{student}</label>
+            <label htmlFor={student}>
+                <input 
+                    type="checkbox" 
+                    name={student} 
+                    id={student} 
+                    checked={studentIsChecked[student]} 
+                    onChange={studentInputHandler}/>
+                {student}
+            </label>
         </React.Fragment>)
 });
 

@@ -2,7 +2,6 @@
 //bijvoorbeeld alle studenten of alle assignments die in het input array voorkomen
 export const retrieveUniqueElements = (arr, key) => {
     const newArr = [];
-    //console.log("key is:" + key)
     arr.forEach(element => {
         if(!newArr.includes(element[key])){
             newArr.push(element[key])
@@ -15,13 +14,8 @@ export const retrieveUniqueElements = (arr, key) => {
 //en geef dit terug als object.
 export const calculateAverage = (arr) => {
     const length = arr.length;
-    if (length>0) {let newAssignmentName;
-        if(typeof(arr[1])!=="undefined" && arr[0].assignment===arr[1].assignment){
-            newAssignmentName = arr[0].assignment;
-        }
-        else {
-            newAssignmentName = "Average";
-        };
+    if (length>0) {
+        const newAssignmentName= arr[0].assignment;
         const totalFunFactor = arr.map(element => element.funFactor).reduce((accumulated, currentValue) =>{
             return accumulated + currentValue ;
         });
@@ -33,7 +27,7 @@ export const calculateAverage = (arr) => {
         return { assignment:newAssignmentName , funFactor:averageFunFactor , difficulty:averageDifficulty }
     }
     else {
-        alert("Select at least one student and one assignment");
+        console.log("Select at least one student and one assignment");
         return;
     }
 }

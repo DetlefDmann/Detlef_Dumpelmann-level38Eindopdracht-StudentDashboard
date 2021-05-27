@@ -9,8 +9,7 @@ const assignmentIsChecked = useSelector(selectAssignmentsIsChecked);
 const dispatch = useDispatch();
 
 const assignmentInputHandler = (e) => {
-    const {name, checked} = e.target
-    console.log(checked + name);
+    const {name, checked} = e.target;
     dispatch(setAssignmentsIsChecked({
         ...assignmentIsChecked, [name]:checked
     }))
@@ -22,11 +21,11 @@ const assignmentsInputJSX = assignments.map(assignment => {
         <React.Fragment key={uuid()}>
             <div><label htmlFor={assignment}>
                 <input 
-                type="checkbox" 
-                name={assignment} 
-                id={assignment} 
-                checked={assignmentIsChecked[assignment]}
-                onChange={assignmentInputHandler}/>
+                    type="checkbox" 
+                    name={assignment} 
+                    id={assignment} 
+                    checked={assignmentIsChecked[assignment]}
+                    onChange={assignmentInputHandler}/>
                 {assignment}
             </label></div>
             
