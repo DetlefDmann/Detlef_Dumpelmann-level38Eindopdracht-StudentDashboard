@@ -9,8 +9,7 @@ const studentIsChecked = useSelector(selectStudentsIsChecked);
 const dispatch = useDispatch();
 
 const studentInputHandler = (e) => {
-    const {name, checked} = e.target
-    console.log(checked + name);
+    const {name, checked} = e.target;
     dispatch(setStudentsIsChecked({
         ...studentIsChecked, [name]:checked
     }))

@@ -66,13 +66,8 @@ function App() {
     let filteredByStudent = [];
     for (const key in studentChecked) {
       if (studentChecked[key]) {
-        filteredByStudent = filteredByStudent.concat(assignmentsPerStudent[key])
-        
-        // console.log(key)
-        // console.log(studentChecked[key])
-        // console.log(filteredByStudent)
+        filteredByStudent = filteredByStudent.concat(assignmentsPerStudent[key]);
       }
-      else console.log("Student checked key: " + studentChecked[key])
     }
 
     //dan filteren op assignment
@@ -84,7 +79,6 @@ function App() {
             if (assignmentChecked[key]) {
               filteredAssignmentsArray.push(key)
             }
-            else console.log(key + " not added to query.")
         }
 
          // voor deze assignments gaan we het gemiddelde berekenen en opslaan in Redux     
@@ -92,12 +86,8 @@ function App() {
            const totalAverages = filteredAssignmentsArray.map(assignment =>{
                 return calculateAverage(filterArrayByKey(filteredByStudent, "assignment", assignment))//voor iedere assignment wordt het gemiddelde uitgerekend uit het total array
                 });
-              
               dispatch(setAverageArray(totalAverages));
-        }
-
-    // ook een functie maken VOOR 1 OPDRACHT de scores van iedere student laten zien
-                              
+        }                        
   },[assignmentChecked, studentChecked, dispatch, loadingStatus, assignmentsPerStudent])
  
   const studentNames = useSelector(selectStudents)

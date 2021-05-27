@@ -64,7 +64,6 @@ li {
 .selectors--assignments {
   grid-area: bside;
   background-color: var(--secundarydarkcolor);
-  
   justify-content: flex-start;
 }
 

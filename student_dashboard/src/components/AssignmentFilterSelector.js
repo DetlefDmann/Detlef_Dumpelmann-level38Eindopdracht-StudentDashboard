@@ -9,8 +9,7 @@ const assignmentIsChecked = useSelector(selectAssignmentsIsChecked);
 const dispatch = useDispatch();
 
 const assignmentInputHandler = (e) => {
-    const {name, checked} = e.target
-    console.log(checked + name);
+    const {name, checked} = e.target;
     dispatch(setAssignmentsIsChecked({
         ...assignmentIsChecked, [name]:checked
     }))
