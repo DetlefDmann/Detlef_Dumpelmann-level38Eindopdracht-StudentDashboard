@@ -21,10 +21,12 @@ const Chart = ({ student }) => {
     useEffect(() => {
         if(loadingStatus==="ready"){
             const specificData = filterArrayByKey(data , "assignment" , specific.select)// DATA van de geselecteerde opdracht
-            let sortedAverages = [...specificData]
-             console.log(graphOptions.sort)
+            let sortedAverages = [...specificData];
              if (graphOptions.sort==="normal"){
                 setFilteredData(specificData);
+             }
+             else if (graphOptions.sort==="student") {
+                 console.log("no action on sorting the chart")
              }
              else if (graphOptions.sort==="mostfun") {
                 sortedAverages = sortedAverages.sort((a,b) => b.funFactor -a.funFactor);
@@ -34,12 +36,8 @@ const Chart = ({ student }) => {
                  sortedAverages = sortedAverages.sort((a,b) => b.difficulty -a.difficulty);
                  setFilteredData(sortedAverages);
             }
-
-            //hier kunnen de methodes voor de home page komen
          };
     },[data , loadingStatus, specific , graphOptions])
-
-    
 
     
     const width = 300;
@@ -153,6 +151,35 @@ const Chart = ({ student }) => {
         else return null;
 }
 
+  //De legenda
+  const Legend = () => {
+    return (
+    <>
+        <g>
+        <rect
+            className="funFactor--legend"
+            x="-35"
+            y={innerHeight/2}
+            width="3"
+            height="3"
+            strokeWidth="0.25"
+        ></rect>
+        <text x="-30" y={innerHeight/2 + 3} >Fun Factor</text>
+        </g>
+        <g>
+        <rect
+            className="difficulty--legend"
+            x="-35"
+            y={(innerHeight/2)+ 10}
+            width="3"
+            height="3"
+            strokeWidth="0.25"
+        ></rect>
+        <text x="-30" y={(innerHeight/2) + 13}>Moeilijkheid</text>
+        </g>
+    </>)
+}
+
 
     return (
         <div >
@@ -164,6 +191,7 @@ const Chart = ({ student }) => {
                 <DiffBarJSX />
                 <FunLineJSX />
                 <DiffLineJSX />
+                <Legend />
                 <text className="bigText" x={innerWidth/2} y={height- margin.bottom/2 } >Opdracht :{filteredData[0].assignment}</text>
             </g>
         </svg>

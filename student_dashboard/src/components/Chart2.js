@@ -4,8 +4,6 @@ import { scaleBand , scaleLinear , line } from 'd3';
 import { useSelector } from 'react-redux';
 import { selectAverageArray, selectData,  selectLoadingStatus ,selectGraphOptions } from "../features/studentData/studentDataSlice";
 
-
-
 const Chart2 = ({ student }) => {
     const data = useSelector(selectData);
     const averages = useSelector(selectAverageArray);
@@ -26,6 +24,9 @@ const Chart2 = ({ student }) => {
                 sortedAverages = sortedAverages.sort((a,b) => b.funFactor -a.funFactor);
                 setFilteredData(sortedAverages);
              }
+             else if (graphOptions.sort==="student"){
+                setFilteredData(data.filter(d => d.student===student));
+             }
              else {
                  sortedAverages = sortedAverages.sort((a,b) => b.difficulty -a.difficulty);
                  setFilteredData(sortedAverages);
@@ -40,12 +41,11 @@ const Chart2 = ({ student }) => {
                 sortedAverages = sortedAverages.sort((a,b) => b.funFactor -a.funFactor);
                 setFilteredData(sortedAverages);
              }
-             else {
+             else if (graphOptions.sort==="mostdifficult") {
                  sortedAverages = sortedAverages.sort((a,b) => b.difficulty -a.difficulty);
                  setFilteredData(sortedAverages);
             }
-
-            //hier kunnen de methodes voor de home page komen
+            else console.log("no sorting done")
          };
     },[data , averages, loadingStatus, graphOptions, student])
 
@@ -209,7 +209,7 @@ const Chart2 = ({ student }) => {
                 <FunLineJSX />
                 <DiffLineJSX />
                 <Legend />
-                <text></text>
+                <text x={innerWidth/2}>Gemiddelde Waarden per Opdracht</text>
             </g>
         </svg>
         </div>
