@@ -21,19 +21,18 @@ useEffect(() => {
       if (studentChecked[key]) {
         filteredByStudent = filteredByStudent.concat(assignmentsPerStudent[key])
       }
-      else console.log("Student checked key: " + studentChecked[key])
     }
 
     //filteren op opdracht
-          //maak een array met alleen de assignments die aangevinkt zijn
-          let filteredAssignmentsArray = [];
-          for (const key in assignmentChecked) {
-              if (assignmentChecked[key]) {
+    //maak een array met alleen de assignments die aangevinkt zijn
+    let filteredAssignmentsArray = [];
+    for (const key in assignmentChecked) {
+            if (assignmentChecked[key]) {
                 filteredAssignmentsArray = filteredAssignmentsArray.concat(filterArrayByKey(filteredByStudent , "assignment" , key))
-              }
-          }
-        setFilteredData(filteredAssignmentsArray);
-        let sortedFiltered = [...filteredAssignmentsArray]
+            }
+    }
+    setFilteredData(filteredAssignmentsArray);
+    let sortedFiltered = [...filteredAssignmentsArray]
 
     //sorteerfunctie
     if (graphOptions.sort==="normal"){
@@ -51,11 +50,10 @@ useEffect(() => {
          sortedFiltered = sortedFiltered.sort((a,b) => b.difficulty - a.difficulty);
          setFilteredData(sortedFiltered);
     }
-},[loadingStatus , graphOptions , studentChecked , assignmentChecked]);
+},[loadingStatus , graphOptions , studentChecked , assignmentChecked , assignmentsPerStudent ]);
 
 const sortingHandler = (event) => {
-    const name = event.target.getAttribute("name")
-    console.log(name);
+    const name = event.target.getAttribute("name");
     dispatch(setGraphOptions({
         ...graphOptions, sort:name
     }))
