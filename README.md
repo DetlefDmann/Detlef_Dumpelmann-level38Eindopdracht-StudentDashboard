@@ -27,4 +27,17 @@ Ik kwam er na een tijdje achter dat er eigenlijk bijna geen documentatie is voor
 Daarom moest ik veel dingen zelf uitproberen en kwam ik ook dingen tegen die niet echt goed op te lossen waren.
 Een voorbeeld daarvan zijn de tooltips. Ik heb het wel werkend, maar niet zoals ik had gewild.
 
-## Resources:
+## Data:
+
+De data uit het google-sheet heb ik in een gist op github geplaatst, nadat ik het iets bewerkt heb.
+Met een "async thunk" wordt de data opgehaald en in de redux-store opgeslagen.
+
+## Design:
+
+Op een superklein scherm ziet alles er niet perfect uit.
+De website is beter op een tablet-formaat of groter scherm.
+
+## Samenvatting:
+
+Ook dit was weer een leuke en interessante opdracht om te maken.
+Het was een flinke kluif, maar ik heb er weer veel van geleerd.
