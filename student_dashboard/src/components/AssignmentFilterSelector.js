@@ -21,11 +21,11 @@ const assignmentsInputJSX = assignments.map(assignment => {
         <React.Fragment key={uuid()}>
             <div><label htmlFor={assignment}>
                 <input 
-                type="checkbox" 
-                name={assignment} 
-                id={assignment} 
-                checked={assignmentIsChecked[assignment]}
-                onChange={assignmentInputHandler}/>
+                    type="checkbox" 
+                    name={assignment} 
+                    id={assignment} 
+                    checked={assignmentIsChecked[assignment]}
+                    onChange={assignmentInputHandler}/>
                 {assignment}
             </label></div>
             

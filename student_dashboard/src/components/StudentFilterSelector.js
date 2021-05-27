@@ -19,13 +19,15 @@ const studentInputHandler = (e) => {
 const studentInputsJsx = students.map(student => {
     return (
         <React.Fragment key={uuid()}>
-            <input 
-                type="checkbox" 
-                name={student} 
-                id={student} 
-                checked={studentIsChecked[student]} 
-                onChange={studentInputHandler}/>
-            <label htmlFor={student}>{student}</label>
+            <label htmlFor={student}>
+                <input 
+                    type="checkbox" 
+                    name={student} 
+                    id={student} 
+                    checked={studentIsChecked[student]} 
+                    onChange={studentInputHandler}/>
+                {student}
+            </label>
         </React.Fragment>)
 });
 
