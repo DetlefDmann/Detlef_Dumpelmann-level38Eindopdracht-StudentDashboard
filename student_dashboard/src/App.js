@@ -109,8 +109,11 @@ function App() {
         <NavBar />
           <Switch>
               {studentPagesJSX}
-              <Route path='/'>
+              <Route exact path='/'>
                 <Home />
+              </Route>
+              <Route path="*">
+                <Home></Home>
               </Route>
           </Switch>
         <Footer />
