@@ -29,7 +29,7 @@ Een voorbeeld daarvan zijn de tooltips. Ik heb het wel werkend, maar niet zoals 
 
 ## Data:
 
-De data uit het google-sheet heb ik in een gist op github geplaatst, nadat ik het iets bewerkt heb.
+De data uit het google-sheet heb ik in een [gist](https://gist.github.com/DetlefDmann/c602c97a486964da1f267bb665d8479b) op github geplaatst, nadat ik het iets bewerkt heb.
 Met een "async thunk" wordt de data opgehaald en in de redux-store opgeslagen.
 
 ## Design:
